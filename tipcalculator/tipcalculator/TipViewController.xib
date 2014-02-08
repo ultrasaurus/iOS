@@ -8,7 +8,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TipViewController">
             <connections>
                 <outlet property="billTextField" destination="uTw-No-Yes" id="uJg-ay-8pv"/>
-                <outlet property="inputView" destination="wKh-wd-boD" id="auX-Pj-MGe"/>
                 <outlet property="resultsView" destination="iJC-ff-ERI" id="3aW-nb-i6d"/>
                 <outlet property="splitFourLabel" destination="Ne1-tI-sBl" id="trL-IA-fwC"/>
                 <outlet property="splitThreeLabel" destination="Won-37-VQ5" id="xby-z3-P3d"/>

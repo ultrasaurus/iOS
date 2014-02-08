@@ -19,7 +19,8 @@
   TipViewController *vc = [[TipViewController alloc] init];
   UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
   self.window.rootViewController = nvc;
-  
+  nvc.navigationBar.barTintColor = [UIColor colorWithRed:(50/255.0) green:(231/255.0) blue:(126/255.0) alpha:1];
+
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

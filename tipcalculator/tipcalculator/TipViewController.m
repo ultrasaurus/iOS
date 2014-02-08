@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *splitFourLabel;
 @property (weak, nonatomic) IBOutlet UIView *resultsView;
 @property (weak, nonatomic) IBOutlet UIView *inputView;
+@property(nonatomic, retain) UIColor *barTintColor;
 
 
 - (IBAction)onTap:(id)sender;
@@ -37,6 +38,7 @@
         // Custom initialization
       self.title = @"Tabbit";
     }
+  
     return self;
 }
 
