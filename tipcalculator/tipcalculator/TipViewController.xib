@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TipViewController">
             <connections>
                 <outlet property="billTextField" destination="uTw-No-Yes" id="uJg-ay-8pv"/>
+                <outlet property="inputView" destination="wKh-wd-boD" id="auX-Pj-MGe"/>
                 <outlet property="resultsView" destination="iJC-ff-ERI" id="3aW-nb-i6d"/>
                 <outlet property="splitFourLabel" destination="Ne1-tI-sBl" id="trL-IA-fwC"/>
                 <outlet property="splitThreeLabel" destination="Won-37-VQ5" id="xby-z3-P3d"/>
@@ -23,26 +24,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wKh-wd-boD">
-                    <rect key="frame" x="0.0" y="-14" width="320" height="229"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="rds-hp-A3D">
-                            <rect key="frame" x="19" y="181" width="283" height="29"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="18%"/>
-                                <segment title="20%"/>
-                                <segment title="22%"/>
-                            </segments>
-                            <color key="tintColor" red="0.092275045809999998" green="0.50677102799999996" blue="0.37040576339999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="onTap:" destination="-1" eventType="valueChanged" id="odf-x4-qqR"/>
-                            </connections>
-                        </segmentedControl>
-                    </subviews>
-                    <color key="backgroundColor" red="0.19745402038097382" green="0.90721398591995239" blue="0.49581035971641541" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iJC-ff-ERI">
                     <rect key="frame" x="0.0" y="214" width="340" height="354"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -69,21 +50,41 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="36" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t5V-4l-DCC">
-                            <rect key="frame" x="20" y="44" width="281" height="83"/>
+                            <rect key="frame" x="20" y="45" width="281" height="83"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="72"/>
                             <color key="textColor" red="0.13304615019999999" green="1" blue="0.58235996960000003" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$0.00 " textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="148" translatesAutoresizingMaskIntoConstraints="NO" id="cZj-Nq-Uzf">
-                            <rect key="frame" x="148" y="16" width="148" height="29"/>
+                            <rect key="frame" x="148" y="14" width="148" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                             <color key="textColor" red="0.13304615019999999" green="1" blue="0.58235996960000003" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.14799845218658447" green="0.43196961283683777" blue="0.31944209337234497" alpha="0.0" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.092275045809999998" green="0.50677102799999996" blue="0.37040576339999998" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wKh-wd-boD">
+                    <rect key="frame" x="0.0" y="-14" width="320" height="229"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="rds-hp-A3D">
+                            <rect key="frame" x="19" y="181" width="283" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="18%"/>
+                                <segment title="20%"/>
+                                <segment title="22%"/>
+                            </segments>
+                            <color key="tintColor" red="0.092275045809999998" green="0.50677102799999996" blue="0.37040576339999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="onTap:" destination="-1" eventType="valueChanged" id="odf-x4-qqR"/>
+                            </connections>
+                        </segmentedControl>
+                    </subviews>
+                    <color key="backgroundColor" red="0.19745402038097382" green="0.90721398591995239" blue="0.49581035971641541" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="$" textAlignment="right" minimumFontSize="32" translatesAutoresizingMaskIntoConstraints="NO" id="uTw-No-Yes">
                     <rect key="frame" x="22" y="70" width="279" height="86"/>
@@ -97,7 +98,7 @@
                     </connections>
                 </textField>
             </subviews>
-            <color key="backgroundColor" red="0.092275045812129974" green="0.5067710280418396" blue="0.37040576338768005" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.19745402040000001" green="0.90721398590000002" blue="0.49581035969999998" alpha="1" colorSpace="calibratedRGB"/>
             <gestureRecognizers/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

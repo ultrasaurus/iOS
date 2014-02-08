@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface TipViewController : UIViewController
+@property (assign) CGPoint tipControlOriginalCenter;
+@property (assign) CGPoint resultsControlCenter;
+
 
 @end

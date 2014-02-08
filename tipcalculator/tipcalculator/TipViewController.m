@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *splitThreeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *splitFourLabel;
 @property (weak, nonatomic) IBOutlet UIView *resultsView;
+@property (weak, nonatomic) IBOutlet UIView *inputView;
+
 
 - (IBAction)onTap:(id)sender;
 - (IBAction)onEditTab:(id)sender;
@@ -38,17 +40,10 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-  [self.billTextField becomeFirstResponder];
-    [self updateValues];
-}
-
 - (void)didReceiveMemoryWarning
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
 
 
@@ -59,26 +54,42 @@
 
 - (IBAction)onEditTab:(id)sender {
   [self updateValues];
+}
 
-}
-- (void)fadeInResults
+- (void)toggleResults:(NSInteger *)i
 {
-  [UIView beginAnimations:@"fade in" context:nil];
-  [UIView setAnimationDuration:1.0];
-  self.resultsView.alpha = 1.0;
-  [UIView commitAnimations];
+  float tipControlDestY = _tipControlOriginalCenter.y;
+  float resultsControlDestY = _resultsControlCenter.y;
+//  if (self.resultsView.alpha != (int)i) {
+//    self.resultsView.alpha = (int)i;
+//  }
+  if (i == 0){
+    tipControlDestY = _tipControlOriginalCenter.y + 138;
+    resultsControlDestY = _resultsControlCenter.y + 138;
+  }
+  [UIView animateWithDuration:0.3 animations:^{
+    self.tipControl.center = CGPointMake(self.tipControl.center.x, tipControlDestY);
+    self.resultsView.center = CGPointMake(self.resultsView.center.x, resultsControlDestY);
+  } completion:^(BOOL finished){
+  }];
+
+  [UIView animateWithDuration:0.45 animations:^{
+//    self.resultsView.center = CGPointMake(self.resultsView.center.x, self.resultsView.center.y+138);
+    self.resultsView.alpha = (int)i;
+  } completion:^(BOOL finished){
+  }];
+  
 }
+
 - (void)updateValues {
   float billAmount = [self.billTextField.text floatValue];
   NSArray *tipValues = @[@(0.18), @(0.2), @(0.22)];
   float tipAmount = billAmount * [tipValues[self.tipControl.selectedSegmentIndex] floatValue];
   float totalAmount = tipAmount + billAmount;
-  if (totalAmount == 0){
-    NSLog(@"null dood");
-    self.resultsView.alpha = 0;
+  if (totalAmount != 0){
+    [self toggleResults:1];
   }else{
-    [self fadeInResults];
-
+    [self toggleResults:0];
   }
   self.tipLabel.text = [NSString stringWithFormat:@"$%0.2f", tipAmount];
   self.totalLabel.text = [NSString stringWithFormat:@"$%0.2f", totalAmount];
@@ -88,5 +99,34 @@
   self.splitFourLabel.text = [NSString stringWithFormat:@"$%0.2f", totalAmount / 4];
 
 }
+
+- (void)setupViews
+{
+  self.inputView.alpha = 0;
+  self.resultsView.alpha = 0;
+  self.tipControl.alpha = 0;
+  [UIView animateWithDuration:0.2 animations:^{
+    self.inputView.alpha = 1;
+  } completion:^(BOOL finished){
+    [UIView animateWithDuration:0.2 animations:^{
+      self.tipControl.alpha = 1;
+    }];
+      self.tipControl.center = CGPointMake(self.tipControl.center.x, _tipControlOriginalCenter.y + 138);
+      self.resultsView.center = CGPointMake(self.resultsView.center.x, _resultsControlCenter.y + 138);
+  }];
+
+}
+
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  _tipControlOriginalCenter = CGPointMake(self.tipControl.center.x, self.tipControl.center.y);
+  _resultsControlCenter = CGPointMake(self.resultsView.center.x, self.resultsView.center.y);
+  [self.billTextField becomeFirstResponder];
+  [self setupViews];
+  [self updateValues];
+  
+}
+
 
 @end
