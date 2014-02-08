@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *splitTwoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *splitThreeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *splitFourLabel;
+@property (weak, nonatomic) IBOutlet UIView *resultsView;
 
 - (IBAction)onTap:(id)sender;
 - (IBAction)onEditTab:(id)sender;
@@ -60,11 +61,25 @@
   [self updateValues];
 
 }
+- (void)fadeInResults
+{
+  [UIView beginAnimations:@"fade in" context:nil];
+  [UIView setAnimationDuration:1.0];
+  self.resultsView.alpha = 1.0;
+  [UIView commitAnimations];
+}
 - (void)updateValues {
   float billAmount = [self.billTextField.text floatValue];
   NSArray *tipValues = @[@(0.18), @(0.2), @(0.22)];
   float tipAmount = billAmount * [tipValues[self.tipControl.selectedSegmentIndex] floatValue];
   float totalAmount = tipAmount + billAmount;
+  if (totalAmount == 0){
+    NSLog(@"null dood");
+    self.resultsView.alpha = 0;
+  }else{
+    [self fadeInResults];
+
+  }
   self.tipLabel.text = [NSString stringWithFormat:@"$%0.2f", tipAmount];
   self.totalLabel.text = [NSString stringWithFormat:@"$%0.2f", totalAmount];
   
