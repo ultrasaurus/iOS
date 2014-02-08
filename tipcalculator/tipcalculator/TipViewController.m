@@ -14,6 +14,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tipControl;
+@property (weak, nonatomic) IBOutlet UILabel *splitTwoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *splitThreeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *splitFourLabel;
 
 - (IBAction)onTap:(id)sender;
 - (IBAction)onEditTab:(id)sender;
@@ -62,8 +65,13 @@
   NSArray *tipValues = @[@(0.18), @(0.2), @(0.22)];
   float tipAmount = billAmount * [tipValues[self.tipControl.selectedSegmentIndex] floatValue];
   float totalAmount = tipAmount + billAmount;
-  self.tipLabel.text = [NSString stringWithFormat:@"%0.2f", tipAmount];
+  self.tipLabel.text = [NSString stringWithFormat:@"$%0.2f", tipAmount];
   self.totalLabel.text = [NSString stringWithFormat:@"$%0.2f", totalAmount];
+  
+  self.splitTwoLabel.text = [NSString stringWithFormat:@"$%0.2f", totalAmount / 2];
+  self.splitThreeLabel.text = [NSString stringWithFormat:@"$%0.2f", totalAmount / 3];
+  self.splitFourLabel.text = [NSString stringWithFormat:@"$%0.2f", totalAmount / 4];
+
 }
 
 @end
