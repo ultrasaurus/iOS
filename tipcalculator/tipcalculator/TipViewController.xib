@@ -39,6 +39,9 @@
                     <color key="textColor" red="0.27235478940000002" green="0.27235478940000002" blue="0.27235478940000002" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="72"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                    <connections>
+                        <action selector="onEditTab:" destination="-1" eventType="editingChanged" id="0Ti-0X-rGl"/>
+                    </connections>
                 </textField>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="rds-hp-A3D">
                     <rect key="frame" x="20" y="303" width="283" height="29"/>

@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tipControl;
 
 - (IBAction)onTap:(id)sender;
+- (IBAction)onEditTab:(id)sender;
 
 - (void)updateValues;
 
@@ -36,6 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+  [self.billTextField becomeFirstResponder];
     [self updateValues];
 }
 
@@ -49,6 +51,11 @@
 - (IBAction)onTap:(id)sender {
   [self.view endEditing:YES];
   [self updateValues];
+}
+
+- (IBAction)onEditTab:(id)sender {
+  [self updateValues];
+
 }
 - (void)updateValues {
   float billAmount = [self.billTextField.text floatValue];
