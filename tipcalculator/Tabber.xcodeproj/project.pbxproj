@@ -34,20 +34,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D9CF8BAD18A4CA9600C44AC8 /* tipcalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tipcalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9CF8BAD18A4CA9600C44AC8 /* Tabber.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tabber.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9CF8BB018A4CA9600C44AC8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D9CF8BB218A4CA9600C44AC8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D9CF8BB418A4CA9600C44AC8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		D9CF8BB818A4CA9600C44AC8 /* tipcalculator-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "tipcalculator-Info.plist"; sourceTree = "<group>"; };
+		D9CF8BB818A4CA9600C44AC8 /* Tabber-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tabber-Info.plist"; sourceTree = "<group>"; };
 		D9CF8BBA18A4CA9600C44AC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D9CF8BBC18A4CA9600C44AC8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D9CF8BBE18A4CA9600C44AC8 /* tipcalculator-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "tipcalculator-Prefix.pch"; sourceTree = "<group>"; };
+		D9CF8BBE18A4CA9600C44AC8 /* Tabber-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tabber-Prefix.pch"; sourceTree = "<group>"; };
 		D9CF8BBF18A4CA9600C44AC8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D9CF8BC018A4CA9600C44AC8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D9CF8BC218A4CA9600C44AC8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		D9CF8BC818A4CA9600C44AC8 /* tipcalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tipcalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9CF8BC818A4CA9600C44AC8 /* TabberTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TabberTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9CF8BC918A4CA9600C44AC8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		D9CF8BD118A4CA9600C44AC8 /* tipcalculatorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "tipcalculatorTests-Info.plist"; sourceTree = "<group>"; };
+		D9CF8BD118A4CA9600C44AC8 /* TabberTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TabberTests-Info.plist"; sourceTree = "<group>"; };
 		D9CF8BD318A4CA9600C44AC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D9CF8BD518A4CA9600C44AC8 /* tipcalculatorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tipcalculatorTests.m; sourceTree = "<group>"; };
 		D9CF8BE218A4CBF200C44AC8 /* TipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipViewController.h; sourceTree = "<group>"; };
@@ -92,8 +92,8 @@
 		D9CF8BAE18A4CA9600C44AC8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D9CF8BAD18A4CA9600C44AC8 /* tipcalculator.app */,
-				D9CF8BC818A4CA9600C44AC8 /* tipcalculatorTests.xctest */,
+				D9CF8BAD18A4CA9600C44AC8 /* Tabber.app */,
+				D9CF8BC818A4CA9600C44AC8 /* TabberTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,10 +126,10 @@
 		D9CF8BB718A4CA9600C44AC8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D9CF8BB818A4CA9600C44AC8 /* tipcalculator-Info.plist */,
+				D9CF8BB818A4CA9600C44AC8 /* Tabber-Info.plist */,
 				D9CF8BB918A4CA9600C44AC8 /* InfoPlist.strings */,
 				D9CF8BBC18A4CA9600C44AC8 /* main.m */,
-				D9CF8BBE18A4CA9600C44AC8 /* tipcalculator-Prefix.pch */,
+				D9CF8BBE18A4CA9600C44AC8 /* Tabber-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -146,7 +146,7 @@
 		D9CF8BD018A4CA9600C44AC8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D9CF8BD118A4CA9600C44AC8 /* tipcalculatorTests-Info.plist */,
+				D9CF8BD118A4CA9600C44AC8 /* TabberTests-Info.plist */,
 				D9CF8BD218A4CA9600C44AC8 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -155,9 +155,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D9CF8BAC18A4CA9600C44AC8 /* tipcalculator */ = {
+		D9CF8BAC18A4CA9600C44AC8 /* Tabber */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D9CF8BD918A4CA9600C44AC8 /* Build configuration list for PBXNativeTarget "tipcalculator" */;
+			buildConfigurationList = D9CF8BD918A4CA9600C44AC8 /* Build configuration list for PBXNativeTarget "Tabber" */;
 			buildPhases = (
 				D9CF8BA918A4CA9600C44AC8 /* Sources */,
 				D9CF8BAA18A4CA9600C44AC8 /* Frameworks */,
@@ -167,14 +167,14 @@
 			);
 			dependencies = (
 			);
-			name = tipcalculator;
+			name = Tabber;
 			productName = tipcalculator;
-			productReference = D9CF8BAD18A4CA9600C44AC8 /* tipcalculator.app */;
+			productReference = D9CF8BAD18A4CA9600C44AC8 /* Tabber.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D9CF8BC718A4CA9600C44AC8 /* tipcalculatorTests */ = {
+		D9CF8BC718A4CA9600C44AC8 /* TabberTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D9CF8BDC18A4CA9600C44AC8 /* Build configuration list for PBXNativeTarget "tipcalculatorTests" */;
+			buildConfigurationList = D9CF8BDC18A4CA9600C44AC8 /* Build configuration list for PBXNativeTarget "TabberTests" */;
 			buildPhases = (
 				D9CF8BC418A4CA9600C44AC8 /* Sources */,
 				D9CF8BC518A4CA9600C44AC8 /* Frameworks */,
@@ -185,9 +185,9 @@
 			dependencies = (
 				D9CF8BCE18A4CA9600C44AC8 /* PBXTargetDependency */,
 			);
-			name = tipcalculatorTests;
+			name = TabberTests;
 			productName = tipcalculatorTests;
-			productReference = D9CF8BC818A4CA9600C44AC8 /* tipcalculatorTests.xctest */;
+			productReference = D9CF8BC818A4CA9600C44AC8 /* TabberTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -207,7 +207,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D9CF8BA818A4CA9600C44AC8 /* Build configuration list for PBXProject "tipcalculator" */;
+			buildConfigurationList = D9CF8BA818A4CA9600C44AC8 /* Build configuration list for PBXProject "Tabber" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -219,8 +219,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D9CF8BAC18A4CA9600C44AC8 /* tipcalculator */,
-				D9CF8BC718A4CA9600C44AC8 /* tipcalculatorTests */,
+				D9CF8BAC18A4CA9600C44AC8 /* Tabber */,
+				D9CF8BC718A4CA9600C44AC8 /* TabberTests */,
 			);
 		};
 /* End PBXProject section */
@@ -270,7 +270,7 @@
 /* Begin PBXTargetDependency section */
 		D9CF8BCE18A4CA9600C44AC8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D9CF8BAC18A4CA9600C44AC8 /* tipcalculator */;
+			target = D9CF8BAC18A4CA9600C44AC8 /* Tabber */;
 			targetProxy = D9CF8BCD18A4CA9600C44AC8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -377,10 +377,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "tipcalculator/tipcalculator-Prefix.pch";
-				INFOPLIST_FILE = "tipcalculator/tipcalculator-Info.plist";
+				GCC_PREFIX_HEADER = "tipcalculator/Tabber-Prefix.pch";
+				INFOPLIST_FILE = "tipcalculator/Tabber-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Tabber;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -394,10 +394,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "tipcalculator/tipcalculator-Prefix.pch";
-				INFOPLIST_FILE = "tipcalculator/tipcalculator-Info.plist";
+				GCC_PREFIX_HEADER = "tipcalculator/Tabber-Prefix.pch";
+				INFOPLIST_FILE = "tipcalculator/Tabber-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Tabber;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -419,8 +419,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "tipcalculatorTests/tipcalculatorTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "tipcalculatorTests/TabberTests-Info.plist";
+				PRODUCT_NAME = TabberTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -438,8 +438,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "tipcalculator/tipcalculator-Prefix.pch";
-				INFOPLIST_FILE = "tipcalculatorTests/tipcalculatorTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "tipcalculatorTests/TabberTests-Info.plist";
+				PRODUCT_NAME = TabberTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -448,7 +448,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D9CF8BA818A4CA9600C44AC8 /* Build configuration list for PBXProject "tipcalculator" */ = {
+		D9CF8BA818A4CA9600C44AC8 /* Build configuration list for PBXProject "Tabber" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D9CF8BD718A4CA9600C44AC8 /* Debug */,
@@ -457,7 +457,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D9CF8BD918A4CA9600C44AC8 /* Build configuration list for PBXNativeTarget "tipcalculator" */ = {
+		D9CF8BD918A4CA9600C44AC8 /* Build configuration list for PBXNativeTarget "Tabber" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D9CF8BDA18A4CA9600C44AC8 /* Debug */,
@@ -466,7 +466,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D9CF8BDC18A4CA9600C44AC8 /* Build configuration list for PBXNativeTarget "tipcalculatorTests" */ = {
+		D9CF8BDC18A4CA9600C44AC8 /* Build configuration list for PBXNativeTarget "TabberTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D9CF8BDD18A4CA9600C44AC8 /* Debug */,

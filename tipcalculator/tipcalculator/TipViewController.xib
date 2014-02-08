@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <objects>
@@ -23,6 +23,37 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wKh-wd-boD">
+                    <rect key="frame" x="0.0" y="-14" width="320" height="582"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="$" textAlignment="right" minimumFontSize="32" translatesAutoresizingMaskIntoConstraints="NO" id="uTw-No-Yes">
+                            <rect key="frame" x="20" y="82" width="279" height="80"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="tintColor" red="0.13304615019999999" green="1" blue="0.58235996960000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.092275045809999998" green="0.50677102799999996" blue="0.37040576339999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="72"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad"/>
+                            <connections>
+                                <action selector="onEditTab:" destination="-1" eventType="editingChanged" id="0Ti-0X-rGl"/>
+                            </connections>
+                        </textField>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="rds-hp-A3D">
+                            <rect key="frame" x="19" y="181" width="283" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="15%"/>
+                                <segment title="20%"/>
+                                <segment title="22%"/>
+                            </segments>
+                            <color key="tintColor" red="0.092275045809999998" green="0.50677102799999996" blue="0.37040576339999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="onTap:" destination="-1" eventType="valueChanged" id="odf-x4-qqR"/>
+                            </connections>
+                        </segmentedControl>
+                    </subviews>
+                    <color key="backgroundColor" red="0.19745402038097382" green="0.90721398591995239" blue="0.49581035971641541" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iJC-ff-ERI">
                     <rect key="frame" x="0.0" y="214" width="340" height="354"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -65,37 +96,6 @@
                     </subviews>
                     <color key="backgroundColor" red="0.092275045809999998" green="0.50677102799999996" blue="0.37040576339999998" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wKh-wd-boD">
-                    <rect key="frame" x="0.0" y="-14" width="320" height="229"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="rds-hp-A3D">
-                            <rect key="frame" x="19" y="181" width="283" height="29"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="18%"/>
-                                <segment title="20%"/>
-                                <segment title="22%"/>
-                            </segments>
-                            <color key="tintColor" red="0.092275045809999998" green="0.50677102799999996" blue="0.37040576339999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="onTap:" destination="-1" eventType="valueChanged" id="odf-x4-qqR"/>
-                            </connections>
-                        </segmentedControl>
-                    </subviews>
-                    <color key="backgroundColor" red="0.19745402038097382" green="0.90721398591995239" blue="0.49581035971641541" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="$" textAlignment="right" minimumFontSize="32" translatesAutoresizingMaskIntoConstraints="NO" id="uTw-No-Yes">
-                    <rect key="frame" x="22" y="70" width="279" height="86"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="tintColor" red="0.13304615019999999" green="1" blue="0.58235996960000003" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="textColor" red="0.092275045809999998" green="0.50677102799999996" blue="0.37040576339999998" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="72"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad"/>
-                    <connections>
-                        <action selector="onEditTab:" destination="-1" eventType="editingChanged" id="0Ti-0X-rGl"/>
-                    </connections>
-                </textField>
             </subviews>
             <color key="backgroundColor" red="0.19745402040000001" green="0.90721398590000002" blue="0.49581035969999998" alpha="1" colorSpace="calibratedRGB"/>
             <gestureRecognizers/>
@@ -110,10 +110,5 @@
                 <action selector="onTap:" destination="-1" id="KXD-7D-bp3"/>
             </connections>
         </tapGestureRecognizer>
-        <view contentMode="scaleToFill" id="p2h-U6-QM1">
-            <rect key="frame" x="0.0" y="0.0" width="279" height="28"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <color key="backgroundColor" red="0.19745402040000001" green="0.90721398590000002" blue="0.49581035969999998" alpha="1" colorSpace="calibratedRGB"/>
-        </view>
     </objects>
 </document>

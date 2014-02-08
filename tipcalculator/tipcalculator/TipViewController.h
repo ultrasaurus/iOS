@@ -11,6 +11,6 @@
 @interface TipViewController : UIViewController
 @property (assign) CGPoint tipControlOriginalCenter;
 @property (assign) CGPoint resultsControlCenter;
-
+@property (assign) CGRect billTextFieldOriginalFrame;
 
 @end

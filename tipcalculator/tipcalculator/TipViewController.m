@@ -36,9 +36,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-      self.title = @"Tabbit";
+      self.title = @"Tabber";
     }
-  
     return self;
 }
 
@@ -50,33 +49,40 @@
 
 
 - (IBAction)onTap:(id)sender {
-  [self.view endEditing:YES];
-  [self updateValues];
+  if ([self.billTextField.text floatValue] != 0){
+    [self.view endEditing:YES];
+    [self updateValues];
+  }
 }
 
 - (IBAction)onEditTab:(id)sender {
   [self updateValues];
 }
 
-- (void)toggleResults:(double *)i
+- (void)toggleResults
 {
-  float tipControlDestY = _tipControlOriginalCenter.y;
-  float resultsControlDestY = _resultsControlCenter.y;
-//  if (self.resultsView.alpha != (int)i) {
-//    self.resultsView.alpha = (int)i;
-//  }
-  if (i == 0){
-    tipControlDestY = _tipControlOriginalCenter.y + 138;
-    resultsControlDestY = _resultsControlCenter.y + 138;
+  float tipControlDestY = _tipControlOriginalCenter.y + 138;
+  float resultsControlDestY = _resultsControlCenter.y + 138;
+  CGRect billTextFieldDest = _billTextFieldOriginalFrame;
+  billTextFieldDest.origin.y = _billTextFieldOriginalFrame.origin.y + 88;
+  float i = 0;
+
+  if ([self.billTextField.text floatValue] > 0){
+    tipControlDestY = _tipControlOriginalCenter.y;
+    resultsControlDestY = _resultsControlCenter.y;
+    billTextFieldDest.origin.y = _billTextFieldOriginalFrame.origin.y;
+    i = 1;
   }
   [UIView animateWithDuration:0.3 animations:^{
     self.tipControl.center = CGPointMake(self.tipControl.center.x, tipControlDestY);
     self.resultsView.center = CGPointMake(self.resultsView.center.x, resultsControlDestY);
+    self.billTextField.frame = billTextFieldDest;
   } completion:^(BOOL finished){
   }];
 
   [UIView animateWithDuration:0.45 animations:^{
 //    self.resultsView.center = CGPointMake(self.resultsView.center.x, self.resultsView.center.y+138);
+    self.tipControl.alpha = (int)i;
     self.resultsView.alpha = (int)i;
   } completion:^(BOOL finished){
   }];
@@ -85,36 +91,35 @@
 
 - (void)updateValues {
   float billAmount = [self.billTextField.text floatValue];
-  NSArray *tipValues = @[@(0.18), @(0.2), @(0.22)];
+  NSArray *tipValues = @[@(0.15), @(0.2), @(0.22)];
   float tipAmount = billAmount * [tipValues[self.tipControl.selectedSegmentIndex] floatValue];
   float totalAmount = tipAmount + billAmount;
-  if (totalAmount != 0){
-    [self toggleResults:1];
-  }else{
-    [self toggleResults:0];
-  }
+  [self toggleResults];
+  
   self.tipLabel.text = [NSString stringWithFormat:@"$%0.2f", tipAmount];
   self.totalLabel.text = [NSString stringWithFormat:@"$%0.2f", totalAmount];
-  
+
+  // Split it up below the keyboard
   self.splitTwoLabel.text = [NSString stringWithFormat:@"$%0.2f", totalAmount / 2];
   self.splitThreeLabel.text = [NSString stringWithFormat:@"$%0.2f", totalAmount / 3];
   self.splitFourLabel.text = [NSString stringWithFormat:@"$%0.2f", totalAmount / 4];
-
 }
 
 - (void)setupViews
 {
-  self.inputView.alpha = 0;
+  self.billTextField.alpha = 0;
   self.resultsView.alpha = 0;
   self.tipControl.alpha = 0;
+
+  CGRect billTextFieldDest = _billTextFieldOriginalFrame;
+  billTextFieldDest.origin.y = _billTextFieldOriginalFrame.origin.y + 88;
   [UIView animateWithDuration:0.2 animations:^{
-    self.inputView.alpha = 1;
+//    self.inputView.alpha = 1;
   } completion:^(BOOL finished){
-    [UIView animateWithDuration:0.2 animations:^{
-      self.tipControl.alpha = 1;
-    }];
       self.tipControl.center = CGPointMake(self.tipControl.center.x, _tipControlOriginalCenter.y + 138);
       self.resultsView.center = CGPointMake(self.resultsView.center.x, _resultsControlCenter.y + 138);
+    self.billTextField.alpha = 1;
+    self.billTextField.frame = billTextFieldDest;
   }];
 
 }
@@ -124,6 +129,7 @@
   [super viewDidLoad];
   _tipControlOriginalCenter = CGPointMake(self.tipControl.center.x, self.tipControl.center.y);
   _resultsControlCenter = CGPointMake(self.resultsView.center.x, self.resultsView.center.y);
+    _billTextFieldOriginalFrame = self.billTextField.frame;
   [self.billTextField becomeFirstResponder];
   [self setupViews];
   [self updateValues];
