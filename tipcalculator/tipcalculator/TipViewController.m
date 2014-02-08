@@ -58,7 +58,7 @@
   [self updateValues];
 }
 
-- (void)toggleResults:(NSInteger *)i
+- (void)toggleResults:(double *)i
 {
   float tipControlDestY = _tipControlOriginalCenter.y;
   float resultsControlDestY = _resultsControlCenter.y;
