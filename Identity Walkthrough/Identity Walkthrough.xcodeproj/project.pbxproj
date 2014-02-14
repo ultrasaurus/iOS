@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D9B287D718ADBAFE00723AB8 /* Context@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B287D618ADBAFE00723AB8 /* Context@2x.png */; };
+		D9B287DA18ADFAEC00723AB8 /* Timeline@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B287D918ADFAEC00723AB8 /* Timeline@2x.png */; };
+		D9B287DC18ADFBCE00723AB8 /* AboutBase@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B287DB18ADFBCE00723AB8 /* AboutBase@2x.png */; };
 		D9CA11EF18ADA3FA00252904 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9CA11EE18ADA3FA00252904 /* Foundation.framework */; };
 		D9CA11F118ADA3FA00252904 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9CA11F018ADA3FA00252904 /* CoreGraphics.framework */; };
 		D9CA11F318ADA3FA00252904 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9CA11F218ADA3FA00252904 /* UIKit.framework */; };
@@ -40,6 +42,8 @@
 
 /* Begin PBXFileReference section */
 		D9B287D618ADBAFE00723AB8 /* Context@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Context@2x.png"; sourceTree = "<group>"; };
+		D9B287D918ADFAEC00723AB8 /* Timeline@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Timeline@2x.png"; sourceTree = "<group>"; };
+		D9B287DB18ADFBCE00723AB8 /* AboutBase@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AboutBase@2x.png"; sourceTree = "<group>"; };
 		D9CA11EB18ADA3FA00252904 /* Identity Walkthrough.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Identity Walkthrough.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9CA11EE18ADA3FA00252904 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D9CA11F018ADA3FA00252904 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -94,6 +98,8 @@
 		D9B287D818ADBB0700723AB8 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				D9B287DB18ADFBCE00723AB8 /* AboutBase@2x.png */,
+				D9B287D918ADFAEC00723AB8 /* Timeline@2x.png */,
 				D9B287D618ADBAFE00723AB8 /* Context@2x.png */,
 			);
 			name = Assets;
@@ -260,6 +266,8 @@
 				D9B287D718ADBAFE00723AB8 /* Context@2x.png in Resources */,
 				D9CA120118ADA3FA00252904 /* Images.xcassets in Resources */,
 				D9CA122B18ADA44500252904 /* AboutViewController.xib in Resources */,
+				D9B287DC18ADFBCE00723AB8 /* AboutBase@2x.png in Resources */,
+				D9B287DA18ADFAEC00723AB8 /* Timeline@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

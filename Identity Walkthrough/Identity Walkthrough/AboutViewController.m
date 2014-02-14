@@ -9,6 +9,9 @@
 #import "AboutViewController.h"
 
 @interface AboutViewController ()
+@property (weak, nonatomic) IBOutlet UIScrollView *AboutContent;
+@property (weak, nonatomic) IBOutlet UIButton *askButtonAddress;
+- (IBAction)askButtonAddressUp:(id)sender;
 
 @end
 
@@ -19,6 +22,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+      self.title = @"About";
+
     }
     return self;
 }
@@ -27,6 +32,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+  self.AboutContent.contentSize = CGSizeMake(320, 725);
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,4 +42,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)askButtonAddressUp:(id)sender {
+  
+}
 @end
