@@ -30,8 +30,9 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+  [super viewDidLoad];
+  // Do any additional setup after loading the view from its nib.
+  [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,4 +46,9 @@
   ProfileViewController *ProfileVC = [[ProfileViewController alloc] init];
   [self.navigationController pushViewController:ProfileVC animated:YES];
 }
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+  return UIStatusBarStyleLightContent;
+}
+
 @end

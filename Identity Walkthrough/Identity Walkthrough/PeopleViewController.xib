@@ -26,6 +26,7 @@
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.19745402040000001" green="0.90721398590000002" blue="0.49581035969999998" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

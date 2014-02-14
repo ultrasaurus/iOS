@@ -15,6 +15,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
     // Override point for customization after application launch.
   
   PeopleViewController *peopleVC = [[PeopleViewController alloc] init];
@@ -39,7 +41,9 @@
                                       nil];
   
   // set as the root window
-  self.window.rootViewController = tabBarController;
+  [self.window addSubview:[tabBarController view]];
+
+//  self.window.rootViewController = tabBarController;
 
   
   
