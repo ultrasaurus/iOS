@@ -44,6 +44,9 @@
                             <state key="normal" title="Add Location" image="i_location">
                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="onButton:" destination="-1" eventType="touchUpInside" id="vm6-YK-QAs"/>
+                            </connections>
                         </button>
                     </subviews>
                 </view>

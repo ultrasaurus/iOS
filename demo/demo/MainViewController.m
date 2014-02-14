@@ -12,6 +12,11 @@
 @property (weak, nonatomic) IBOutlet UIView *storyCard;
 @property (weak, nonatomic) IBOutlet UIImageView *picBox;
 
+- (IBAction)onButton:(id)sender;
+- (void)sayHello;
+- (void)sayMyName: (NSString *)name;
+- (void)sayMyFirstName:(NSString *)firstName lastName:(NSString *)lastName;
+
 @end
 
 @implementation MainViewController
@@ -25,13 +30,17 @@
     return self;
 }
 
+- (void)sayHello{
+  NSLog(@"HellO!");
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
   
   NSLog(@"view did load");
   
-    // Do any additional setup after loading the view from its nib.
+  // Do any additional setup after loading the view from its nib.
   self.storyCard.layer.cornerRadius = 4;
   self.storyCard.layer.shadowColor = [UIColor blackColor].CGColor;
   self.storyCard.layer.shadowOffset = CGSizeMake(0, 2);
@@ -45,10 +54,10 @@
   CGRect usernameFrame = CGRectMake(12, 12, 200, 24);
   UILabel *userName = [[UILabel alloc] initWithFrame:usernameFrame];
   userName.text = @"Aaron Carámbula";
-//  UIView *userNameBox = [[UIView alloc] initWithFrame:usernameFrame];
-//  userNameBox.backgroundColor = [UIColor blackColor];
-//  [self.storyCard addSubview:userNameBox];
-    [self.storyCard addSubview:userName];
+  //  UIView *userNameBox = [[UIView alloc] initWithFrame:usernameFrame];
+  //  userNameBox.backgroundColor = [UIColor blackColor];
+  //  [self.storyCard addSubview:userNameBox];
+  [self.storyCard addSubview:userName];
   CGRect subtextFrame = CGRectMake(userName.frame.origin.x, userName.frame.origin.y + userName.frame.size.height + 10, userName.frame.size.width, 18);
   UILabel *subText = [[UILabel alloc] initWithFrame:subtextFrame];
   subText.text = @"February 10, 2014";
@@ -57,11 +66,11 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-  
+  NSLog(@"view will appear");
 }
 
 - (void)viewDidAppear:(BOOL)animated{
-  
+  NSLog(@"view did appear");
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,4 +79,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Private methods
+
+- (IBAction)onButton:(id)sender {
+  [self sayHello];
+  [self sayMyName:@"Aaron"];
+  [self sayMyFirstName:@"James" lastName:@"Bond"];
+}
+
+- (void)sayMyName: (NSString *)name {
+  NSLog(@"hey, %@", name);
+}
+
+- (void)sayMyFirstName:(NSString *)firstName lastName:(NSString *)lastName {
+  NSLog(@"My name is %@, %@ %@", lastName, firstName, lastName);
+}
 @end
