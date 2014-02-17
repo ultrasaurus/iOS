@@ -20,6 +20,7 @@
 @property (strong, nonatomic) UITapGestureRecognizer *tapRecognizer;
 @property (strong, nonatomic) UIImage *UFILikeGlyph;
 @property (strong, nonatomic) UIView *UFILikeGlyphView;
+@property (strong, nonatomic) UIControl *UFICommentControl;
 
 
 - (void)willShowKeyboard:(NSNotification *)notification;
@@ -265,13 +266,6 @@
   [self.UFILikeControl addTarget:self action:@selector(UFILikeTouchDown:) forControlEvents:UIControlEventTouchDown];
   [self.UFILikeControl addTarget:self action:@selector(UFILikeTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
 
-//  [UFILikeControl addTarget:self action:@selector(touch:) forControlEvents:capture];
-
-//
-//  [self.UFILikeControl addTarget:self
-//                     action:@selector(anyTouch:)
-//           forControlEvents:UIControlEventTouchUpInside];
-  
   //UFI LIKE LABEL
   TTTAttributedLabel *UFILikeLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(24, 0, self.UFILikeControl.frame.size.width - 28, self.UFILikeControl.frame.size.height)];
   UFILikeLabel.font = [UIFont systemFontOfSize:12];
@@ -290,25 +284,28 @@
   [self.UFILikeControl addSubview:self.UFILikeGlyphView];
 
   //UFI COMMENT CONTAINER
-  UIControl *UFICommentControl = [[UIControl alloc] initWithFrame:CGRectMake(self.UFILikeControl.frame.size.width, 0, UFIContainer.frame.size.width / 3, UFIContainer.frame.size.height)];
-  UFICommentControl.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
-  [UFIContainer addSubview:UFICommentControl];
+  self.UFICommentControl = [[UIControl alloc] initWithFrame:CGRectMake(self.UFILikeControl.frame.size.width, 0, UFIContainer.frame.size.width / 3, UFIContainer.frame.size.height)];
+  self.UFICommentControl.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:0];
+  [UFIContainer addSubview:self.UFICommentControl];
   
   //UFI COMMENT LABEL
-  TTTAttributedLabel *UFICommentLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(24, 0, UFICommentControl.frame.size.width - 28, UFICommentControl.frame.size.height)];
+  TTTAttributedLabel *UFICommentLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(24, 0, self.UFICommentControl.frame.size.width - 28, self.UFICommentControl.frame.size.height)];
   UFICommentLabel.font = [UIFont systemFontOfSize:12];
   UFICommentLabel.textColor = [UIColor darkGrayColor];
   UFICommentLabel.lineBreakMode = NSLineBreakByWordWrapping;
   UFICommentLabel.numberOfLines = 0;
   UFICommentLabel.textAlignment = NSTextAlignmentCenter;
   UFICommentLabel.text = @"Comment";
-  [UFICommentControl addSubview:UFICommentLabel];
+  [self.UFICommentControl addSubview:UFICommentLabel];
   
   //UFI COMMENT GLYPH
   UIImage *UFICommentGlyph = [UIImage imageNamed:@"comment_dark-grey_m.png"];
   UIImageView *UFICommentGlyphView = [[UIImageView alloc] initWithImage:UFICommentGlyph];
   [UFICommentGlyphView setFrame:CGRectMake(8, 9, 14, 14)];
-  [UFICommentControl addSubview:UFICommentGlyphView];
+  [self.UFICommentControl addSubview:UFICommentGlyphView];
+  
+  [self.UFICommentControl addTarget:self action:@selector(UFICommentTouchDown:) forControlEvents:UIControlEventTouchDown];
+  [self.UFICommentControl addTarget:self action:@selector(UFICommentTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
   
   
   //COMMENT FIELD CONTAINER
@@ -423,13 +420,28 @@
 
 - (void) UFILikeTouchUpInside:(id)sender {
 //  self.UFILikeControl.alpha = 1;
-  self.UFILikeGlyph = [UIImage imageNamed:@"like_blue_m.png"];
+//  self.UFILikeGlyph = [UIImage imageNamed:@"like_blue_m.png"];
   [UIControl animateWithDuration:1 delay:0 usingSpringWithDamping:.5 initialSpringVelocity:100 options:0 animations:^{
     self.UFILikeControl.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
   }completion:^(BOOL finished) {
   }];
-
-
 }
+
+- (void) UFICommentTouchDown:(id)sender {
+//  self.UFICommentControl.opacity = .5;
+  [UIControl animateWithDuration:1 delay:0 usingSpringWithDamping:.35 initialSpringVelocity:60 options:0 animations:^{
+    self.UFICommentControl.transform = CGAffineTransformScale(CGAffineTransformIdentity, .85, .85);
+  }completion:^(BOOL finished) {
+  }];
+}
+
+- (void) UFICommentTouchUpInside:(id)sender {
+  //  self.UFILikeControl.alpha = 1;
+  [UIControl animateWithDuration:1 delay:0 usingSpringWithDamping:.5 initialSpringVelocity:100 options:0 animations:^{
+    self.UFICommentControl.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
+  }completion:^(BOOL finished) {
+  }];
+}
+
 
 @end
