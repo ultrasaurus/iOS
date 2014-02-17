@@ -15,6 +15,16 @@
 @property (strong, nonatomic) UIScrollView *storyScroll;
 @property (nonatomic) TTTAttributedLabel *attributedLabel;
 
+@property (strong, nonatomic) UIView *commentInputContainer;
+@property (strong, nonatomic) UIControl *UFILikeControl;
+@property (strong, nonatomic) UITapGestureRecognizer *tapRecognizer;
+@property (strong, nonatomic) UIImage *UFILikeGlyph;
+@property (strong, nonatomic) UIView *UFILikeGlyphView;
+
+
+- (void)willShowKeyboard:(NSNotification *)notification;
+- (void)willHideKeyboard:(NSNotification *)notification;
+
 @end
 
 @implementation PermalinkViewController
@@ -25,6 +35,17 @@
     if (self) {
         // Custom initialization
       self.title = @"Post";
+      
+      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willShowKeyboard:) name:UIKeyboardWillShowNotification object:nil];
+      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willHideKeyboard:) name:UIKeyboardWillHideNotification object:nil];
+      
+      self.tapRecognizer = [[UITapGestureRecognizer alloc]
+                                               initWithTarget:self action:@selector(respondToTapGesture:)];
+      self.tapRecognizer.numberOfTapsRequired = 1;
+      
+      [self.view addGestureRecognizer:self.tapRecognizer];
+      self.tapRecognizer.enabled = NO;
+      
     }
     return self;
 }
@@ -202,7 +223,7 @@
   //  attachmentAction.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
   attachmentAction.backgroundColor = [UIColor whiteColor];
   [attachmentAction.layer setCornerRadius:2.0f];
-  attachmentAction.layer.borderColor = [UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1].CGColor;
+  attachmentAction.layer.borderColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1].CGColor;
   attachmentAction.layer.borderWidth = 0.5f;
   [attachmentContainer addSubview:attachmentAction];
   
@@ -233,16 +254,26 @@
   [storyContainer addSubview:UFIContainer];
 
   //UFI LIKE CONTAINER
-  UIControl *UFILikeControl = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, UFIContainer.frame.size.width / 3, UFIContainer.frame.size.height)];
-  UFILikeControl.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
-  [UFIContainer addSubview:UFILikeControl];
-  
-  [UFILikeControl addTarget:self
-                     action:@selector(myAction)
-           forControlEvents:UIControlEventTouchUpInside];
+  self.UFILikeControl = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, UFIContainer.frame.size.width / 3, UFIContainer.frame.size.height)];
+  self.UFILikeControl.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:0];
+  [UFIContainer addSubview:self.UFILikeControl];
+
+//  UIControlEvents capture = UIControlEventTouchDown;
+//  capture |= UIControlEventTouchDown;
+//  capture |= UIControlEventTouchUpInside;
+//  capture |= UIControlEventTouchUpOutside;
+  [self.UFILikeControl addTarget:self action:@selector(UFILikeTouchDown:) forControlEvents:UIControlEventTouchDown];
+  [self.UFILikeControl addTarget:self action:@selector(UFILikeTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+
+//  [UFILikeControl addTarget:self action:@selector(touch:) forControlEvents:capture];
+
+//
+//  [self.UFILikeControl addTarget:self
+//                     action:@selector(anyTouch:)
+//           forControlEvents:UIControlEventTouchUpInside];
   
   //UFI LIKE LABEL
-  TTTAttributedLabel *UFILikeLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(24, 0, UFILikeControl.frame.size.width - 28, UFILikeControl.frame.size.height)];
+  TTTAttributedLabel *UFILikeLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(24, 0, self.UFILikeControl.frame.size.width - 28, self.UFILikeControl.frame.size.height)];
   UFILikeLabel.font = [UIFont systemFontOfSize:12];
   UFILikeLabel.textColor = [UIColor darkGrayColor];
   UFILikeLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -250,16 +281,16 @@
   UFILikeLabel.textAlignment = NSTextAlignmentCenter;
   UFILikeLabel.userInteractionEnabled = NO;
   UFILikeLabel.text = @"Like";
-  [UFILikeControl addSubview:UFILikeLabel];
+  [self.UFILikeControl addSubview:UFILikeLabel];
   
   //UFI LIKE GLYPH
-  UIImage *UFILikeGlyph = [UIImage imageNamed:@"like_dark-grey_m.png"];
-  UIImageView *UFILikeGlyphView = [[UIImageView alloc] initWithImage:UFILikeGlyph];
-  [UFILikeGlyphView setFrame:CGRectMake(8, 9, 14, 14)];
-  [UFILikeControl addSubview:UFILikeGlyphView];
+  self.UFILikeGlyph = [UIImage imageNamed:@"like_dark-grey_m.png"];
+  self.UFILikeGlyphView = [[UIImageView alloc] initWithImage:self.UFILikeGlyph];
+  [self.UFILikeGlyphView setFrame:CGRectMake(8, 9, 14, 14)];
+  [self.UFILikeControl addSubview:self.UFILikeGlyphView];
 
   //UFI COMMENT CONTAINER
-  UIControl *UFICommentControl = [[UIControl alloc] initWithFrame:CGRectMake(UFILikeControl.frame.size.width, 0, UFIContainer.frame.size.width / 3, UFIContainer.frame.size.height)];
+  UIControl *UFICommentControl = [[UIControl alloc] initWithFrame:CGRectMake(self.UFILikeControl.frame.size.width, 0, UFIContainer.frame.size.width / 3, UFIContainer.frame.size.height)];
   UFICommentControl.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
   [UFIContainer addSubview:UFICommentControl];
   
@@ -281,14 +312,20 @@
   
   
   //COMMENT FIELD CONTAINER
-  UIView *commentInputContainer = [[UIView alloc] initWithFrame:CGRectMake(0, self.window.frame.size.height - 32, 320, 32)];
-  commentInputContainer.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
-  commentInputContainer.layer.shadowColor = [UIColor blackColor].CGColor;
-  commentInputContainer.layer.shadowOffset = CGSizeMake(0, -.5);
-  commentInputContainer.layer.shadowOpacity = .1;
-  commentInputContainer.layer.shadowRadius = 0;
+  self.commentInputContainer = [[UIView alloc] initWithFrame:CGRectMake(0, self.window.frame.size.height - 48, 320, 48)];
+  self.commentInputContainer.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
+  self.commentInputContainer.layer.shadowColor = [UIColor blackColor].CGColor;
+  self.commentInputContainer.layer.shadowOffset = CGSizeMake(0, -.5);
+  self.commentInputContainer.layer.shadowOpacity = .1;
+  self.commentInputContainer.layer.shadowRadius = 0;
+  [self.window addSubview:self.commentInputContainer];
+  
+  UITextView *commentInput = [[UITextView alloc] initWithFrame:CGRectMake(8, 8, 304, 32)];
+  [commentInput.layer setCornerRadius:2.0f];
+  commentInput.layer.borderColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1].CGColor;
+  commentInput.layer.borderWidth = 0.5f;
 
-  [self.window addSubview:commentInputContainer];
+  [self.commentInputContainer addSubview:commentInput];
 
 }
 
@@ -309,6 +346,90 @@
 -(void)myAction {
   NSLog(@"Eh up, someone just pressed the button!");
   
+}
+
+- (void)willShowKeyboard:(NSNotification *)notification {
+  NSDictionary *userInfo = [notification userInfo];
+  
+  // Get the keyboard height and width from the notification
+  // Size varies depending on OS, language, orientation
+  CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+  NSLog(@"Height: %f Width: %f", kbSize.height, kbSize.width);
+  
+  // Get the animation duration and curve from the notification
+  NSNumber *durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey];
+  NSTimeInterval animationDuration = durationValue.doubleValue;
+  NSNumber *curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey];
+  UIViewAnimationCurve animationCurve = curveValue.intValue;
+  
+  // Move the view with the same duration and animation curve so that it will match with the keyboard animation
+  [UIView animateWithDuration:animationDuration
+                        delay:0.0
+                      options:(animationCurve << 16)
+                   animations:^{
+                     self.commentInputContainer.frame = CGRectMake(0, self.view.frame.size.height - kbSize.height - self.commentInputContainer.frame.size.height, self.commentInputContainer.frame.size.width, self.commentInputContainer.frame.size.height);
+                   }
+                   completion:nil];
+    self.tapRecognizer.enabled = YES;
+}
+
+
+- (void)willHideKeyboard:(NSNotification *)notification {
+  NSDictionary *userInfo = [notification userInfo];
+  
+  // Get the animation duration and curve from the notification
+  NSNumber *durationValue = userInfo[UIKeyboardAnimationDurationUserInfoKey];
+  NSTimeInterval animationDuration = durationValue.doubleValue;
+  NSNumber *curveValue = userInfo[UIKeyboardAnimationCurveUserInfoKey];
+  UIViewAnimationCurve animationCurve = curveValue.intValue;
+  
+  // Move the view with the same duration and animation curve so that it will match with the keyboard animation
+  [UIView animateWithDuration:animationDuration
+                        delay:0.0
+                      options:(animationCurve << 16)
+                   animations:^{
+                     self.commentInputContainer.frame = CGRectMake(0, self.window.frame.size.height - 48, 320, 48);
+                   }
+                   completion:nil];
+    self.tapRecognizer.enabled = NO;
+}
+
+
+
+- (void)respondToTapGesture:(UITapGestureRecognizer *)recognizer {
+  // Get the location of the gesture
+//  CGPoint location = [recognizer locationInView:self.view];
+  NSLog(@"OK OK OK OK OK OK OK ");
+  [self.view endEditing:YES];
+
+//  // Display an image view at that location
+//  [self drawImageForGestureRecognizer:recognizer atPoint:location];
+//  
+//  // Animate the image view so that it fades out
+//  [UIView animateWithDuration:0.5 animations:^{
+//    self.imageView.alpha = 0.0;
+//  }];
+}
+
+
+
+- (void) UFILikeTouchDown:(id)sender {
+//    self.UFILikeControl.alpha = .5;
+  [UIControl animateWithDuration:1 delay:0 usingSpringWithDamping:.35 initialSpringVelocity:60 options:0 animations:^{
+    self.UFILikeControl.transform = CGAffineTransformScale(CGAffineTransformIdentity, .85, .85);
+  }completion:^(BOOL finished) {
+  }];
+}
+
+- (void) UFILikeTouchUpInside:(id)sender {
+//  self.UFILikeControl.alpha = 1;
+  self.UFILikeGlyph = [UIImage imageNamed:@"like_blue_m.png"];
+  [UIControl animateWithDuration:1 delay:0 usingSpringWithDamping:.5 initialSpringVelocity:100 options:0 animations:^{
+    self.UFILikeControl.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
+  }completion:^(BOOL finished) {
+  }];
+
+
 }
 
 @end
