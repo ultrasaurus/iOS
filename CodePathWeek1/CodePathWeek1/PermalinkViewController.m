@@ -25,6 +25,9 @@
 @property (strong, nonatomic) UIControl *UFICommentControl;
 @property (strong, nonatomic) TTTAttributedLabel *UFILikeLabel;
 @property (strong, nonatomic) TTTAttributedLabel *UFILikeActiveLabel;
+@property (strong, nonatomic) UIControl *attachmentAction;
+@property (strong, nonatomic) UITextView *commentInput;
+@property (strong, nonatomic) TTTAttributedLabel *commentPost;
 
 
 - (void)willShowKeyboard:(NSNotification *)notification;
@@ -222,29 +225,33 @@
   
   
   //ACTION
-  UIControl *attachmentAction = [[UIControl alloc] initWithFrame:CGRectMake(attachmentTitle.frame.origin.x, attachmentPicView.frame.origin.y + attachmentPicView.frame.size.height - 32, 132, 32)];
+  self.attachmentAction = [[UIControl alloc] initWithFrame:CGRectMake(attachmentTitle.frame.origin.x, attachmentPicView.frame.origin.y + attachmentPicView.frame.size.height - 32, 132, 32)];
   //  attachmentAction.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
-  attachmentAction.backgroundColor = [UIColor whiteColor];
-  [attachmentAction.layer setCornerRadius:2.0f];
-  attachmentAction.layer.borderColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1].CGColor;
-  attachmentAction.layer.borderWidth = 0.5f;
-  [attachmentContainer addSubview:attachmentAction];
-  
+  self.attachmentAction.backgroundColor = [UIColor colorWithWhite:255/255.0 alpha:.75];
+  [self.attachmentAction.layer setCornerRadius:2.0f];
+  self.attachmentAction.layer.borderColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1].CGColor;
+  self.attachmentAction.layer.borderWidth = 0.5f;
+  [attachmentContainer addSubview:self.attachmentAction];
+  [self.attachmentAction addTarget:self action:@selector(ActionTouchDown:) forControlEvents:UIControlEventTouchDown];
+  [self.attachmentAction addTarget:self action:@selector(ActionTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+
   //ACTION PLAY LABEL
-  TTTAttributedLabel *actionPlayLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(24, 0, attachmentAction.frame.size.width - 28, attachmentAction.frame.size.height)];
+  TTTAttributedLabel *actionPlayLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(24, 0, self.attachmentAction.frame.size.width - 28, self.attachmentAction.frame.size.height)];
   actionPlayLabel.font = [UIFont systemFontOfSize:12];
   actionPlayLabel.textColor = [UIColor darkGrayColor];
   actionPlayLabel.lineBreakMode = NSLineBreakByWordWrapping;
   actionPlayLabel.numberOfLines = 0;
+  actionPlayLabel.userInteractionEnabled = NO;
   actionPlayLabel.textAlignment = NSTextAlignmentCenter;
   actionPlayLabel.text = @"Watch on Netflix";
-  [attachmentAction addSubview:actionPlayLabel];
+
+  [self.attachmentAction addSubview:actionPlayLabel];
   
   //ACTION LEAVE GLYPH
   UIImage *actionLeaveGlyph = [UIImage imageNamed:@"leave_dark-grey_m.png"];
   UIImageView *actionLeaveGlyphView = [[UIImageView alloc] initWithImage:actionLeaveGlyph];
   [actionLeaveGlyphView setFrame:CGRectMake(8, 9, 14, 14)];
-  [attachmentAction addSubview:actionLeaveGlyphView];
+  [self.attachmentAction addSubview:actionLeaveGlyphView];
 
   //UFI
   //CONTAINER
@@ -334,17 +341,22 @@
 //  self.commentInputContainer.layer.shadowRadius = 0;
   [self.window addSubview:self.commentInputContainer];
   
-  UITextView *commentInput = [[UITextView alloc] initWithFrame:CGRectMake(7, 8, 304, 28)];
-  [commentInput setDelegate:self];
-  [commentInput.layer setCornerRadius:2.0f];
-  commentInput.layer.borderColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1].CGColor;
-  commentInput.layer.borderWidth = 0.5f;
-  commentInput.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:.75];
-  commentInput.text = @"Add a comment";
-  commentInput.textColor = [UIColor lightGrayColor];
-
-
-  [self.commentInputContainer addSubview:commentInput];
+  self.commentInput = [[UITextView alloc] initWithFrame:CGRectMake(7, 8, 306, 28)];
+  [self.commentInput setDelegate:self];
+  [self.commentInput.layer setCornerRadius:2.0f];
+  self.commentInput.layer.borderColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1].CGColor;
+  self.commentInput.layer.borderWidth = 0.5f;
+  self.commentInput.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:.75];
+  self.commentInput.text = @"Add a comment";
+//  commentInput.returnKeyType = UIReturnKeySend;
+  self.commentInput.textColor = [UIColor lightGrayColor];
+  [self.commentInputContainer addSubview:self.commentInput];
+  
+  self.commentPost = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(self.commentInput.frame.origin.x + self.commentInput.frame.size.width + 12, self.commentInput.frame.origin.y, 100, 28)];
+  self.commentPost.font = [UIFont systemFontOfSize:14];
+  self.commentPost.textColor = [UIColor colorWithRed:86/255.0f green:148/255.0f blue:253/255.0f alpha:1];
+  self.commentPost.text = @"Post";
+  [self.commentInputContainer addSubview:self.commentPost];
 
 }
 
@@ -387,6 +399,9 @@
                       options:(animationCurve << 16)
                    animations:^{
                      self.commentInputContainer.frame = CGRectMake(0, self.view.frame.size.height - kbSize.height - self.commentInputContainer.frame.size.height, self.commentInputContainer.frame.size.width, self.commentInputContainer.frame.size.height);
+                     [self.commentInput setFrame:CGRectMake(7, 8, 260, 28)];
+                     [self.commentPost setFrame:CGRectMake(self.commentInput.frame.origin.x + self.commentInput.frame.size.width + 12, self.commentInput.frame.origin.y, 100, 28)];
+
                    }
                    completion:nil];
     self.tapRecognizer.enabled = YES;
@@ -470,6 +485,7 @@
     commentInput.text = @"";
     commentInput.textColor = [UIColor blackColor];
     commentInput.tag = 1;
+    self.commentPost.alpha = 1;
   }
   return YES;
 }
@@ -481,8 +497,22 @@
     commentInput.text = @"Add a comment";
     commentInput.textColor = [UIColor lightGrayColor];
     commentInput.tag = 0;
+    self.commentPost.alpha = .25;
   }
 }
 
+- (void)ActionTouchDown:(id)sender {
+  [UIControl animateWithDuration:1 delay:0 usingSpringWithDamping:.35 initialSpringVelocity:60 options:0 animations:^{
+    self.attachmentAction.transform = CGAffineTransformScale(CGAffineTransformIdentity, .85, .85);
+  }completion:^(BOOL finished) {
+  }];
+}
+
+- (void)ActionTouchUpInside:(id)sender {
+  [UIControl animateWithDuration:1 delay:0 usingSpringWithDamping:.5 initialSpringVelocity:100 options:0 animations:^{
+    self.attachmentAction.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
+  }completion:^(BOOL finished) {
+  }];
+}
 
 @end
