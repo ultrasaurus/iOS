@@ -32,6 +32,7 @@
 
 - (void)willShowKeyboard:(NSNotification *)notification;
 - (void)willHideKeyboard:(NSNotification *)notification;
+- (void)respondToTapGesture:(UITapGestureRecognizer *)recognizer;
 
 @end
 
@@ -137,9 +138,9 @@
   /////////////
   //STORY BODY
   // Test out different story lengths :D
-//  NSString *story = @"Just like the first season. Aces.";
-  NSString *story = @"Just like the first season, it took 2 episodes to get up and running. http://thegboatdotnet.files.wordpress.com/2011/12/mind-blown1.gif.";
-//  NSString *story = @"Just like the first season, it took 2 episodes to get up and running. It was sorta flat and lost it's character in episode one, all shock but no flair. Now Frank is talking to us in the scene and it feels back on track. http://thegboatdotnet.files.wordpress.com/2011/12/mind-blown1.gif.";
+  NSString *story = @"Just like the first season. Aces.";
+//  NSString *story = @"Just like the first season, it took 2 episodes to get up and running. http://thegboatdotnet.files.wordpress.com/2011/12/mind-blown1.gif.";
+//  NSString *story = @"Just like the first season, it took 2 episodes to get up and running. It was sorta flat and lost it's character in episode one, all shock but no flair. Now Frank is talking to us in the scene and it feels back on track. http://thegboatdotnet.files.wordpress.com/2011/12/mind-blown1.gif. I wonder how long it will be before the house comes down, or if it will. Hard to believe none of this will catch up.";
 
   TTTAttributedLabel *storyBody = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(12, socialSentence.frame.origin.y + socialSentence.frame.size.height + 12, 296, 400)];
   storyBody.font = [UIFont systemFontOfSize:14];
@@ -172,7 +173,7 @@
                               constrainedToSize:maximumStorySize
                                   lineBreakMode:storyBody.lineBreakMode];
   CGRect storyBodyFrame = storyBody.frame;
-  storyBodyFrame.size.height = expectedStorySize.height;
+  storyBodyFrame.size.height = expectedStorySize.height + 4;
   storyBody.frame = storyBodyFrame;
   
   [storyCard addSubview:storyBody];
@@ -455,9 +456,10 @@
   [UIControl animateWithDuration:.25 delay:0 options:0 animations:^{
     self.UFILikeGlyphView.alpha = self.UFILikeGlyphView.alpha == 0 ? 1 : 0;
     self.UFILikeGlyphActiveView.alpha = self.UFILikeGlyphActiveView.alpha == 1 ? 0 : 1;
-  } completion:^(BOOL finished) {
     self.UFILikeLabel.alpha = self.UFILikeLabel.alpha == 0 ? 1 : 0;
     self.UFILikeActiveLabel.alpha = self.UFILikeActiveLabel.alpha == 0 ? 1 : 0;
+
+  } completion:^(BOOL finished) {
   }];
   [UIControl animateWithDuration:1 delay:0 usingSpringWithDamping:.5 initialSpringVelocity:100 options:0 animations:^{
     self.UFILikeControl.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);

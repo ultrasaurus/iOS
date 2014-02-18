@@ -28,6 +28,8 @@
   pvcNavigation.navigationBar.tintColor = [UIColor whiteColor];
   NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"HelveticaNeue-Medium" size:18.0f], NSFontAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName, nil];
   
+  pvcNavigation.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+  
   [[UINavigationBar appearance] setTitleTextAttributes:attributes];
 
   
