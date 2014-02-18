@@ -65,9 +65,6 @@
   
   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(print_Message)];
   
-
-  
-  
   //////////////
   //SCROLL
   self.storyScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
@@ -139,8 +136,11 @@
   
   /////////////
   //STORY BODY
+  // Test out different story lengths :D
+//  NSString *story = @"Just like the first season. Aces.";
   NSString *story = @"Just like the first season, it took 2 episodes to get up and running. http://thegboatdotnet.files.wordpress.com/2011/12/mind-blown1.gif.";
-  
+//  NSString *story = @"Just like the first season, it took 2 episodes to get up and running. It was sorta flat and lost it's character in episode one, all shock but no flair. Now Frank is talking to us in the scene and it feels back on track. http://thegboatdotnet.files.wordpress.com/2011/12/mind-blown1.gif.";
+
   TTTAttributedLabel *storyBody = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(12, socialSentence.frame.origin.y + socialSentence.frame.size.height + 12, 296, 400)];
   storyBody.font = [UIFont systemFontOfSize:14];
   storyBody.textColor = [UIColor darkGrayColor];
@@ -172,7 +172,7 @@
                               constrainedToSize:maximumStorySize
                                   lineBreakMode:storyBody.lineBreakMode];
   CGRect storyBodyFrame = storyBody.frame;
-  storyBodyFrame.size.height = expectedStorySize.height + 4;
+  storyBodyFrame.size.height = expectedStorySize.height;
   storyBody.frame = storyBodyFrame;
   
   [storyCard addSubview:storyBody];
@@ -255,16 +255,16 @@
 
   //UFI
   //CONTAINER
-  UIView *UFIContainer = [[UIView alloc] initWithFrame:CGRectMake(0, storyCard.frame.size.height + 1, storyCard.frame.size.width, 36)];
+  UIView *UFIContainer = [[UIView alloc] initWithFrame:CGRectMake(0, attachmentContainer.frame.origin.y + attachmentContainer.frame.size.height + 16, storyCard.frame.size.width, 36)];
   UFIContainer.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
   UFIContainer.layer.shadowColor = [UIColor blackColor].CGColor;
-  UFIContainer.layer.shadowOffset = CGSizeMake(0, 1);
+  UFIContainer.layer.shadowOffset = CGSizeMake(0, -.5);
   UFIContainer.layer.shadowOpacity = .05;
   UFIContainer.layer.shadowRadius = 0;
-  [storyContainer addSubview:UFIContainer];
+  [storyCard addSubview:UFIContainer];
 
   //UFI LIKE CONTAINER
-  self.UFILikeControl = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, UFIContainer.frame.size.width / 3, UFIContainer.frame.size.height)];
+  self.UFILikeControl = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, 64, UFIContainer.frame.size.height)];
   self.UFILikeControl.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:0];
   [UFIContainer addSubview:self.UFILikeControl];
   [self.UFILikeControl addTarget:self action:@selector(UFILikeTouchDown:) forControlEvents:UIControlEventTouchDown];
@@ -331,7 +331,10 @@
   [self.UFICommentControl addTarget:self action:@selector(UFICommentTouchDown:) forControlEvents:UIControlEventTouchDown];
   [self.UFICommentControl addTarget:self action:@selector(UFICommentTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
   
+  //END HEIGHT OF STORYCARD
+  storyCard.frame = CGRectMake(storyCard.frame.origin.x, storyCard.frame.origin.y, storyCard.frame.size.width, UFIContainer.frame.origin.y + UFIContainer.frame.size.height);
   
+  /////////////////////////
   //COMMENT FIELD CONTAINER
   self.commentInputContainer = [[UIView alloc] initWithFrame:CGRectMake(0, self.window.frame.size.height - 44, 320, 44)];
   self.commentInputContainer.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:.95];
