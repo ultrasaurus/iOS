@@ -267,12 +267,12 @@
   [self.UFILikeControl addTarget:self action:@selector(UFILikeTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
 
   //UFI LIKE LABEL
-  TTTAttributedLabel *UFILikeLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(24, 0, self.UFILikeControl.frame.size.width - 28, self.UFILikeControl.frame.size.height)];
+  TTTAttributedLabel *UFILikeLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(40, 0, self.UFILikeControl.frame.size.width - 28, self.UFILikeControl.frame.size.height)];
   UFILikeLabel.font = [UIFont systemFontOfSize:12];
   UFILikeLabel.textColor = [UIColor darkGrayColor];
   UFILikeLabel.lineBreakMode = NSLineBreakByWordWrapping;
   UFILikeLabel.numberOfLines = 0;
-  UFILikeLabel.textAlignment = NSTextAlignmentCenter;
+//  UFILikeLabel.textAlignment = NSTextAlignmentCenter;
   UFILikeLabel.userInteractionEnabled = NO;
   UFILikeLabel.text = @"Like";
   [self.UFILikeControl addSubview:UFILikeLabel];
@@ -280,7 +280,7 @@
   //UFI LIKE GLYPH
   self.UFILikeGlyph = [UIImage imageNamed:@"like_dark-grey_m.png"];
   self.UFILikeGlyphView = [[UIImageView alloc] initWithImage:self.UFILikeGlyph];
-  [self.UFILikeGlyphView setFrame:CGRectMake(8, 9, 14, 14)];
+  [self.UFILikeGlyphView setFrame:CGRectMake(16, 9, 14, 14)];
   [self.UFILikeControl addSubview:self.UFILikeGlyphView];
 
   //UFI COMMENT CONTAINER
@@ -289,19 +289,20 @@
   [UFIContainer addSubview:self.UFICommentControl];
   
   //UFI COMMENT LABEL
-  TTTAttributedLabel *UFICommentLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(24, 0, self.UFICommentControl.frame.size.width - 28, self.UFICommentControl.frame.size.height)];
+  TTTAttributedLabel *UFICommentLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(40, 0, self.UFICommentControl.frame.size.width - 28, self.UFICommentControl.frame.size.height)];
   UFICommentLabel.font = [UIFont systemFontOfSize:12];
   UFICommentLabel.textColor = [UIColor darkGrayColor];
   UFICommentLabel.lineBreakMode = NSLineBreakByWordWrapping;
   UFICommentLabel.numberOfLines = 0;
-  UFICommentLabel.textAlignment = NSTextAlignmentCenter;
+//  UFICommentLabel.textAlignment = NSTextAlignmentCenter;
+  UFICommentLabel.userInteractionEnabled = NO;
   UFICommentLabel.text = @"Comment";
   [self.UFICommentControl addSubview:UFICommentLabel];
   
   //UFI COMMENT GLYPH
   UIImage *UFICommentGlyph = [UIImage imageNamed:@"comment_dark-grey_m.png"];
   UIImageView *UFICommentGlyphView = [[UIImageView alloc] initWithImage:UFICommentGlyph];
-  [UFICommentGlyphView setFrame:CGRectMake(8, 9, 14, 14)];
+  [UFICommentGlyphView setFrame:CGRectMake(16, 9, 14, 14)];
   [self.UFICommentControl addSubview:UFICommentGlyphView];
   
   [self.UFICommentControl addTarget:self action:@selector(UFICommentTouchDown:) forControlEvents:UIControlEventTouchDown];
@@ -437,6 +438,7 @@
 
 - (void) UFICommentTouchUpInside:(id)sender {
   //  self.UFILikeControl.alpha = 1;
+  [self.commentInputContainer becomeFirstResponder];
   [UIControl animateWithDuration:1 delay:0 usingSpringWithDamping:.5 initialSpringVelocity:100 options:0 animations:^{
     self.UFICommentControl.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
   }completion:^(BOOL finished) {
