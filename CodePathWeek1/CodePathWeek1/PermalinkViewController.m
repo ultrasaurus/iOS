@@ -44,8 +44,7 @@
       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willShowKeyboard:) name:UIKeyboardWillShowNotification object:nil];
       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willHideKeyboard:) name:UIKeyboardWillHideNotification object:nil];
       
-      self.tapRecognizer = [[UITapGestureRecognizer alloc]
-                                               initWithTarget:self action:@selector(respondToTapGesture:)];
+      self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(respondToTapGesture:)];
       self.tapRecognizer.numberOfTapsRequired = 1;
       
       [self.view addGestureRecognizer:self.tapRecognizer];
@@ -95,7 +94,7 @@
   UIImage *profilePic = [UIImage imageNamed:@"profilePicAaron"];
   UIImageView *profilePicView = [[UIImageView alloc] initWithImage:profilePic];
   [profilePicView setFrame:CGRectMake(12, 12, 32, 32)];
-//  profilePicView.appearance.rad
+  //  profilePicView.appearance.rad
   [storyCard addSubview:profilePicView];
   
   //SOCIAL SENTENCE
@@ -184,7 +183,6 @@
   timestampLabel.textColor = [UIColor lightGrayColor];
   [storyCard addSubview:timestampLabel];
   
-
   
   //ATTACHMENT
   //CONTAINER
@@ -200,7 +198,7 @@
   //PIC
   UIImage *attachmentPic = [UIImage imageNamed:@"hocImage.png"];
   UIImageView *attachmentPicView = [[UIImageView alloc] initWithImage:attachmentPic];
-  [attachmentPicView setFrame:CGRectMake(0, 16, 68, 96)];
+  [attachmentPicView setFrame:CGRectMake(0, 8, 68, 96)];
   [attachmentContainer addSubview:attachmentPicView];
 
   //TITLE
@@ -262,11 +260,6 @@
   self.UFILikeControl = [[UIControl alloc] initWithFrame:CGRectMake(0, 0, UFIContainer.frame.size.width / 3, UFIContainer.frame.size.height)];
   self.UFILikeControl.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:0];
   [UFIContainer addSubview:self.UFILikeControl];
-
-//  UIControlEvents capture = UIControlEventTouchDown;
-//  capture |= UIControlEventTouchDown;
-//  capture |= UIControlEventTouchUpInside;
-//  capture |= UIControlEventTouchUpOutside;
   [self.UFILikeControl addTarget:self action:@selector(UFILikeTouchDown:) forControlEvents:UIControlEventTouchDown];
   [self.UFILikeControl addTarget:self action:@selector(UFILikeTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -276,7 +269,7 @@
   self.UFILikeLabel.textColor = [UIColor darkGrayColor];
   self.UFILikeLabel.lineBreakMode = NSLineBreakByWordWrapping;
   self.UFILikeLabel.numberOfLines = 0;
-//  UFILikeLabel.textAlignment = NSTextAlignmentCenter;
+  //  self.UFILikeLabel.textAlignment = NSTextAlignmentCenter;
   self.UFILikeLabel.userInteractionEnabled = NO;
   self.UFILikeLabel.text = @"Like";
   [self.UFILikeControl addSubview:self.UFILikeLabel];
@@ -293,7 +286,6 @@
   self.UFILikeActiveLabel.alpha = 0;
   [self.UFILikeControl addSubview:self.UFILikeActiveLabel];
 
-  
   //UFI LIKE GLYPH
   self.UFILikeGlyph = [UIImage imageNamed:@"like_dark-grey_m.png"];
   self.UFILikeGlyphView = [[UIImageView alloc] initWithImage:self.UFILikeGlyph];
@@ -334,18 +326,23 @@
   
   
   //COMMENT FIELD CONTAINER
-  self.commentInputContainer = [[UIView alloc] initWithFrame:CGRectMake(0, self.window.frame.size.height - 48, 320, 48)];
-  self.commentInputContainer.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
-  self.commentInputContainer.layer.shadowColor = [UIColor blackColor].CGColor;
-  self.commentInputContainer.layer.shadowOffset = CGSizeMake(0, -.5);
-  self.commentInputContainer.layer.shadowOpacity = .1;
-  self.commentInputContainer.layer.shadowRadius = 0;
+  self.commentInputContainer = [[UIView alloc] initWithFrame:CGRectMake(0, self.window.frame.size.height - 44, 320, 44)];
+  self.commentInputContainer.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:.95];
+//  self.commentInputContainer.layer.shadowColor = [UIColor blackColor].CGColor;
+//  self.commentInputContainer.layer.shadowOffset = CGSizeMake(0, -.5);
+//  self.commentInputContainer.layer.shadowOpacity = .1;
+//  self.commentInputContainer.layer.shadowRadius = 0;
   [self.window addSubview:self.commentInputContainer];
   
-  UITextView *commentInput = [[UITextView alloc] initWithFrame:CGRectMake(8, 8, 304, 32)];
+  UITextView *commentInput = [[UITextView alloc] initWithFrame:CGRectMake(7, 8, 304, 28)];
+  [commentInput setDelegate:self];
   [commentInput.layer setCornerRadius:2.0f];
   commentInput.layer.borderColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1].CGColor;
   commentInput.layer.borderWidth = 0.5f;
+  commentInput.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:.75];
+  commentInput.text = @"Add a comment";
+  commentInput.textColor = [UIColor lightGrayColor];
+
 
   [self.commentInputContainer addSubview:commentInput];
 
@@ -410,7 +407,7 @@
                         delay:0.0
                       options:(animationCurve << 16)
                    animations:^{
-                     self.commentInputContainer.frame = CGRectMake(0, self.window.frame.size.height - 48, 320, 48);
+                     self.commentInputContainer.frame = CGRectMake(0, self.window.frame.size.height - 44, 320, 44);
                    }
                    completion:nil];
     self.tapRecognizer.enabled = NO;
@@ -420,17 +417,8 @@
 
 - (void)respondToTapGesture:(UITapGestureRecognizer *)recognizer {
   // Get the location of the gesture
-//  CGPoint location = [recognizer locationInView:self.view];
-  NSLog(@"OK OK OK OK OK OK OK ");
+  //  CGPoint location = [recognizer locationInView:self.view];
   [self.view endEditing:YES];
-
-//  // Display an image view at that location
-//  [self drawImageForGestureRecognizer:recognizer atPoint:location];
-//  
-//  // Animate the image view so that it fades out
-//  [UIView animateWithDuration:0.5 animations:^{
-//    self.imageView.alpha = 0.0;
-//  }];
 }
 
 
@@ -474,6 +462,26 @@
     self.UFICommentControl.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
   }completion:^(BOOL finished) {
   }];
+}
+
+- (BOOL) textViewShouldBeginEditing:(UITextView *)commentInput
+{
+  if(commentInput.tag == 0) {
+    commentInput.text = @"";
+    commentInput.textColor = [UIColor blackColor];
+    commentInput.tag = 1;
+  }
+  return YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)commentInput
+{
+  if([commentInput.text length] == 0)
+  {
+    commentInput.text = @"Add a comment";
+    commentInput.textColor = [UIColor lightGrayColor];
+    commentInput.tag = 0;
+  }
 }
 
 
