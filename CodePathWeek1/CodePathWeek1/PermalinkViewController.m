@@ -19,8 +19,12 @@
 @property (strong, nonatomic) UIControl *UFILikeControl;
 @property (strong, nonatomic) UITapGestureRecognizer *tapRecognizer;
 @property (strong, nonatomic) UIImage *UFILikeGlyph;
+@property (strong, nonatomic) UIImage *UFILikeGlyphActive;
 @property (strong, nonatomic) UIView *UFILikeGlyphView;
+@property (strong, nonatomic) UIView *UFILikeGlyphActiveView;
 @property (strong, nonatomic) UIControl *UFICommentControl;
+@property (strong, nonatomic) TTTAttributedLabel *UFILikeLabel;
+@property (strong, nonatomic) TTTAttributedLabel *UFILikeActiveLabel;
 
 
 - (void)willShowKeyboard:(NSNotification *)notification;
@@ -267,21 +271,41 @@
   [self.UFILikeControl addTarget:self action:@selector(UFILikeTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
 
   //UFI LIKE LABEL
-  TTTAttributedLabel *UFILikeLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(40, 0, self.UFILikeControl.frame.size.width - 28, self.UFILikeControl.frame.size.height)];
-  UFILikeLabel.font = [UIFont systemFontOfSize:12];
-  UFILikeLabel.textColor = [UIColor darkGrayColor];
-  UFILikeLabel.lineBreakMode = NSLineBreakByWordWrapping;
-  UFILikeLabel.numberOfLines = 0;
+  self.UFILikeLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(36, 0, self.UFILikeControl.frame.size.width - 28, self.UFILikeControl.frame.size.height)];
+  self.UFILikeLabel.font = [UIFont systemFontOfSize:12];
+  self.UFILikeLabel.textColor = [UIColor darkGrayColor];
+  self.UFILikeLabel.lineBreakMode = NSLineBreakByWordWrapping;
+  self.UFILikeLabel.numberOfLines = 0;
 //  UFILikeLabel.textAlignment = NSTextAlignmentCenter;
-  UFILikeLabel.userInteractionEnabled = NO;
-  UFILikeLabel.text = @"Like";
-  [self.UFILikeControl addSubview:UFILikeLabel];
+  self.UFILikeLabel.userInteractionEnabled = NO;
+  self.UFILikeLabel.text = @"Like";
+  [self.UFILikeControl addSubview:self.UFILikeLabel];
+
+  //UFI LIKE ACTIVE LABEL
+  self.UFILikeActiveLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(36, 0, self.UFILikeControl.frame.size.width - 28, self.UFILikeControl.frame.size.height)];
+  self.UFILikeActiveLabel.font = [UIFont systemFontOfSize:12];
+  self.UFILikeActiveLabel.textColor = [UIColor colorWithRed:86/255.0f green:148/255.0f blue:253/255.0f alpha:1];
+  self.UFILikeActiveLabel.lineBreakMode = NSLineBreakByWordWrapping;
+  self.UFILikeActiveLabel.numberOfLines = 0;
+  //  UFILikeLabel.textAlignment = NSTextAlignmentCenter;
+  self.UFILikeActiveLabel.userInteractionEnabled = NO;
+  self.UFILikeActiveLabel.text = @"Like";
+  self.UFILikeActiveLabel.alpha = 0;
+  [self.UFILikeControl addSubview:self.UFILikeActiveLabel];
+
   
   //UFI LIKE GLYPH
   self.UFILikeGlyph = [UIImage imageNamed:@"like_dark-grey_m.png"];
   self.UFILikeGlyphView = [[UIImageView alloc] initWithImage:self.UFILikeGlyph];
-  [self.UFILikeGlyphView setFrame:CGRectMake(16, 9, 14, 14)];
+  [self.UFILikeGlyphView setFrame:CGRectMake(16, 10, 14, 14)];
   [self.UFILikeControl addSubview:self.UFILikeGlyphView];
+
+  //UFI LIKE GLYPH ACTIVE STATE
+  self.UFILikeGlyphActive = [UIImage imageNamed:@"like_blue_m.png"];
+  self.UFILikeGlyphActiveView = [[UIImageView alloc] initWithImage:self.UFILikeGlyphActive];
+  [self.UFILikeGlyphActiveView setFrame:CGRectMake(16, 9, 14, 14)];
+  self.UFILikeGlyphActiveView.alpha = 0;
+  [self.UFILikeControl addSubview:self.UFILikeGlyphActiveView];
 
   //UFI COMMENT CONTAINER
   self.UFICommentControl = [[UIControl alloc] initWithFrame:CGRectMake(self.UFILikeControl.frame.size.width, 0, UFIContainer.frame.size.width / 3, UFIContainer.frame.size.height)];
@@ -289,7 +313,7 @@
   [UFIContainer addSubview:self.UFICommentControl];
   
   //UFI COMMENT LABEL
-  TTTAttributedLabel *UFICommentLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(40, 0, self.UFICommentControl.frame.size.width - 28, self.UFICommentControl.frame.size.height)];
+  TTTAttributedLabel *UFICommentLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(36, 0, self.UFICommentControl.frame.size.width - 28, self.UFICommentControl.frame.size.height)];
   UFICommentLabel.font = [UIFont systemFontOfSize:12];
   UFICommentLabel.textColor = [UIColor darkGrayColor];
   UFICommentLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -302,7 +326,7 @@
   //UFI COMMENT GLYPH
   UIImage *UFICommentGlyph = [UIImage imageNamed:@"comment_dark-grey_m.png"];
   UIImageView *UFICommentGlyphView = [[UIImageView alloc] initWithImage:UFICommentGlyph];
-  [UFICommentGlyphView setFrame:CGRectMake(16, 9, 14, 14)];
+  [UFICommentGlyphView setFrame:CGRectMake(16, 10, 14, 14)];
   [self.UFICommentControl addSubview:UFICommentGlyphView];
   
   [self.UFICommentControl addTarget:self action:@selector(UFICommentTouchDown:) forControlEvents:UIControlEventTouchDown];
@@ -422,6 +446,13 @@
 - (void) UFILikeTouchUpInside:(id)sender {
 //  self.UFILikeControl.alpha = 1;
 //  self.UFILikeGlyph = [UIImage imageNamed:@"like_blue_m.png"];
+  [UIControl animateWithDuration:.25 delay:0 options:0 animations:^{
+    self.UFILikeGlyphView.alpha = self.UFILikeGlyphView.alpha == 0 ? 1 : 0;
+    self.UFILikeGlyphActiveView.alpha = self.UFILikeGlyphActiveView.alpha == 1 ? 0 : 1;
+  } completion:^(BOOL finished) {
+    self.UFILikeLabel.alpha = self.UFILikeLabel.alpha == 0 ? 1 : 0;
+    self.UFILikeActiveLabel.alpha = self.UFILikeActiveLabel.alpha == 0 ? 1 : 0;
+  }];
   [UIControl animateWithDuration:1 delay:0 usingSpringWithDamping:.5 initialSpringVelocity:100 options:0 animations:^{
     self.UFILikeControl.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
   }completion:^(BOOL finished) {
