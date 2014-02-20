@@ -138,9 +138,9 @@
   /////////////
   //STORY BODY
   // Test out different story lengths :D
-  NSString *story = @"Just like the first season. Aces.";
+//  NSString *story = @"Just like the first season. Aces.";
 //  NSString *story = @"Just like the first season, it took 2 episodes to get up and running. http://thegboatdotnet.files.wordpress.com/2011/12/mind-blown1.gif.";
-//  NSString *story = @"Just like the first season, it took 2 episodes to get up and running. It was sorta flat and lost it's character in episode one, all shock but no flair. Now Frank is talking to us in the scene and it feels back on track. http://thegboatdotnet.files.wordpress.com/2011/12/mind-blown1.gif. I wonder how long it will be before the house comes down, or if it will. Hard to believe none of this will catch up.";
+  NSString *story = @"Just like the first season, it took 2 episodes to get up and running. It was sorta flat and lost it's character in episode one, all shock but no flair. Now Frank is talking to us in the scene and it feels back on track. http://thegboatdotnet.files.wordpress.com/2011/12/mind-blown1.gif. I wonder how long it will be before the house comes down, or if it will. Hard to believe none of this will catch up.";
 
   TTTAttributedLabel *storyBody = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(12, socialSentence.frame.origin.y + socialSentence.frame.size.height + 12, 296, 400)];
   storyBody.font = [UIFont systemFontOfSize:14];
@@ -148,6 +148,7 @@
   storyBody.lineBreakMode = NSLineBreakByWordWrapping;
   storyBody.numberOfLines = 0;
   storyBody.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
+//  storyBody.linkAttributes = @[@{@"textColor": [UIColor greenColor]}];
   storyBody.leading = 2;
 //  storyBody.linkAttributes
   storyBody.enabledTextCheckingTypes = NSTextCheckingTypeLink; // Automatically detect links when the label text is subsequently changed
@@ -337,12 +338,14 @@
   
   /////////////////////////
   //COMMENT FIELD CONTAINER
-  self.commentInputContainer = [[UIView alloc] initWithFrame:CGRectMake(0, self.window.frame.size.height - 44, 320, 44)];
+  self.commentInputContainer = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 44, 320, 44)];
   self.commentInputContainer.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:.95];
 //  self.commentInputContainer.layer.shadowColor = [UIColor blackColor].CGColor;
 //  self.commentInputContainer.layer.shadowOffset = CGSizeMake(0, -.5);
 //  self.commentInputContainer.layer.shadowOpacity = .1;
 //  self.commentInputContainer.layer.shadowRadius = 0;
+  self.commentInputContainer.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+
   [self.window addSubview:self.commentInputContainer];
   
   self.commentInput = [[UITextView alloc] initWithFrame:CGRectMake(7, 8, 306, 28)];
@@ -360,6 +363,7 @@
   self.commentPost.font = [UIFont systemFontOfSize:14];
   self.commentPost.textColor = [UIColor colorWithRed:86/255.0f green:148/255.0f blue:253/255.0f alpha:1];
   self.commentPost.text = @"Post";
+
   [self.commentInputContainer addSubview:self.commentPost];
 
 }
@@ -426,7 +430,7 @@
                         delay:0.0
                       options:(animationCurve << 16)
                    animations:^{
-                     self.commentInputContainer.frame = CGRectMake(0, self.window.frame.size.height - 44, 320, 44);
+                     self.commentInputContainer.frame = CGRectMake(0, self.view.frame.size.height - 44, 320, 44);
                    }
                    completion:nil];
     self.tapRecognizer.enabled = NO;
@@ -442,7 +446,7 @@
 
 
 
-- (void) UFILikeTouchDown:(id)sender {
+- (void)UFILikeTouchDown:(id)sender {
 //    self.UFILikeControl.alpha = .5;
   [UIControl animateWithDuration:1 delay:0 usingSpringWithDamping:.35 initialSpringVelocity:60 options:0 animations:^{
     self.UFILikeControl.transform = CGAffineTransformScale(CGAffineTransformIdentity, .85, .85);
@@ -450,7 +454,7 @@
   }];
 }
 
-- (void) UFILikeTouchUpInside:(id)sender {
+- (void)UFILikeTouchUpInside:(id)sender {
 //  self.UFILikeControl.alpha = 1;
 //  self.UFILikeGlyph = [UIImage imageNamed:@"like_blue_m.png"];
   [UIControl animateWithDuration:.25 delay:0 options:0 animations:^{
@@ -467,7 +471,7 @@
   }];
 }
 
-- (void) UFICommentTouchDown:(id)sender {
+- (void)UFICommentTouchDown:(id)sender {
 //  self.UFICommentControl.opacity = .5;
   [UIControl animateWithDuration:1 delay:0 usingSpringWithDamping:.35 initialSpringVelocity:60 options:0 animations:^{
     self.UFICommentControl.transform = CGAffineTransformScale(CGAffineTransformIdentity, .85, .85);
@@ -475,7 +479,7 @@
   }];
 }
 
-- (void) UFICommentTouchUpInside:(id)sender {
+- (void)UFICommentTouchUpInside:(id)sender {
   //  self.UFILikeControl.alpha = 1;
   [self.commentInputContainer becomeFirstResponder];
   [UIControl animateWithDuration:1 delay:0 usingSpringWithDamping:.5 initialSpringVelocity:100 options:0 animations:^{
@@ -484,7 +488,7 @@
   }];
 }
 
-- (BOOL) textViewShouldBeginEditing:(UITextView *)commentInput
+- (BOOL)textViewShouldBeginEditing:(UITextView *)commentInput
 {
   if(commentInput.tag == 0) {
     commentInput.text = @"";

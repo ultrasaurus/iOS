@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D9CF12CB18B1BE4500B9F118"
                BuildableName = "CodePathWeek1.app"
-               BlueprintName = "CodePathWeek1"
-               ReferencedContainer = "container:CodePathWeek1.xcodeproj">
+               BlueprintName = "CodePathWeek2"
+               ReferencedContainer = "container:CodePathWeek2.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D9CF12E618B1BE4500B9F118"
                BuildableName = "CodePathWeek1Tests.xctest"
-               BlueprintName = "CodePathWeek1Tests"
-               ReferencedContainer = "container:CodePathWeek1.xcodeproj">
+               BlueprintName = "CodePathWeek2Tests"
+               ReferencedContainer = "container:CodePathWeek2.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,8 +44,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D9CF12CB18B1BE4500B9F118"
             BuildableName = "CodePathWeek1.app"
-            BlueprintName = "CodePathWeek1"
-            ReferencedContainer = "container:CodePathWeek1.xcodeproj">
+            BlueprintName = "CodePathWeek2"
+            ReferencedContainer = "container:CodePathWeek2.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -63,8 +63,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D9CF12CB18B1BE4500B9F118"
             BuildableName = "CodePathWeek1.app"
-            BlueprintName = "CodePathWeek1"
-            ReferencedContainer = "container:CodePathWeek1.xcodeproj">
+            BlueprintName = "CodePathWeek2"
+            ReferencedContainer = "container:CodePathWeek2.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -81,8 +81,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D9CF12CB18B1BE4500B9F118"
             BuildableName = "CodePathWeek1.app"
-            BlueprintName = "CodePathWeek1"
-            ReferencedContainer = "container:CodePathWeek1.xcodeproj">
+            BlueprintName = "CodePathWeek2"
+            ReferencedContainer = "container:CodePathWeek2.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

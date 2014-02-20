@@ -4,9 +4,9 @@
 //
 //  Created by Aaron Carambula on 2/16/14.
 //  Copyright (c) 2014 Aaron Carambula. All rights reserved.
-//
 
 #import "AppDelegate.h"
+#import "NotificationsViewController.h"
 #import "PermalinkViewController.h"
 
 @implementation AppDelegate
@@ -19,21 +19,44 @@
   // Override point for customization after application launch.
 
   UIColor *fbBar = [UIColor colorWithRed:(61/255.0) green:(95/255.0) blue:(152/255.0) alpha:1];
-  
+  NSDictionary *navAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"HelveticaNeue-Medium" size:18.0f], NSFontAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName, nil];
   
   PermalinkViewController *pvc = [[PermalinkViewController alloc] init];
+  NotificationsViewController *nvc = [[NotificationsViewController alloc] init];
   
   UINavigationController *pvcNavigation = [[UINavigationController alloc] initWithRootViewController:pvc];
   pvcNavigation.navigationBar.barTintColor = fbBar;
   pvcNavigation.navigationBar.tintColor = [UIColor whiteColor];
-  NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"HelveticaNeue-Medium" size:18.0f], NSFontAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName, nil];
-  
   pvcNavigation.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-  
-  [[UINavigationBar appearance] setTitleTextAttributes:attributes];
 
+  UINavigationController *nvcNavigation = [[UINavigationController alloc] initWithRootViewController:nvc];
+  nvcNavigation.navigationBar.barTintColor = fbBar;
+  nvcNavigation.navigationBar.tintColor = [UIColor whiteColor];
+  nvcNavigation.navigationBar.barStyle = UIBarStyleBlackTranslucent;
   
-  self.window.rootViewController = pvcNavigation;
+  [[UINavigationBar appearance] setTitleTextAttributes:navAttributes];
+
+  UITabBarController *tabBarController = [[UITabBarController alloc] init];
+  
+  tabBarController.viewControllers = [NSArray arrayWithObjects:
+                                      nvcNavigation,
+                                      pvcNavigation,
+                                      nil];
+  
+  [[UITabBar appearance] setTintColor:[UIColor colorWithRed:86/255.0 green:148/255.0 blue:253/255.0 alpha:1]];
+  [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
+  
+  pvc.tabBarItem = [[UITabBarItem alloc]
+                    initWithTitle:NSLocalizedString(@"People", @"People")
+                    image:[UIImage imageNamed:@"i_tab_people.png"]
+                    tag:3];
+  nvc.tabBarItem = [[UITabBarItem alloc]
+                    initWithTitle:NSLocalizedString(@"Notifications", @"Notifications")
+                    image:[UIImage imageNamed:@"i_tab_notifications.png"]
+                    tag:3];
+  
+//  self.window.rootViewController = pvcNavigation;
+  self.window.rootViewController = tabBarController;
   self.window.backgroundColor = [UIColor whiteColor];
   
   [self.window makeKeyAndVisible];
