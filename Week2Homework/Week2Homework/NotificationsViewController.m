@@ -13,6 +13,7 @@
 @interface NotificationsViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) NSArray *notifications;
 
 @end
 
@@ -23,6 +24,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+      self.title = @"Notifications";
+      self.notifications = [Notification fakeNotifications];
     }
     return self;
 }
@@ -47,19 +50,15 @@
 #pragma mark - Private Tableview Methods
 
 - (int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-  return 5;
+  return self.notifications.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   
-//  static NSString *cellIdentifier = @"NotificationCell";
-//  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
   NotificationCell *notificationCell = [tableView dequeueReusableCellWithIdentifier:@"NotificationCell"];
-  
-//  UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-
-  notificationCell.notificationText.text = [NSString stringWithFormat:@"This is row %d", indexPath.row];
-
+//  notificationCell.notificationText.text = [NSString stringWithFormat:@"This is row %d", indexPath.row];
+  Notification *notification = self.notifications[indexPath.row];
+  notificationCell.notificationText.text = notification.notifText;
   return notificationCell;
 }
 

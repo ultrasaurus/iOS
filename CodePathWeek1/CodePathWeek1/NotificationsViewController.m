@@ -45,7 +45,8 @@
 //  UITableViewCell *notifsTableViewCell = [[UITableViewCell alloc] init];
   
   // Register Class for Cell Reuse Identifier
-  [self.notifsTable registerClass:[UITableViewCell class] forCellReuseIdentifier:@"notificationTableViewCell"];
+  [self.notifsTable registerClass:[notificationTableViewCell class] forCellReuseIdentifier:@"notificationTableViewCell"];
+
 
 }
 
