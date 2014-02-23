@@ -26,6 +26,7 @@
     if (self) {
         // Custom initialization
       self.title = @"Notifications";
+      
       self.notifications = [Notification fakeNotifications];
     }
     return self;
@@ -34,7 +35,11 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
+
+  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"i_navbar_divebar.png"] style:UIBarButtonItemStylePlain target:nil action:nil];
+
+  self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:nil action:nil];
+
   self.tableView.dataSource = self;
   self.tableView.delegate = self;
   [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
@@ -59,7 +64,6 @@
   
   NotificationCell *notificationCell = [tableView dequeueReusableCellWithIdentifier:@"NotificationCell"];
   
-//  notificationCell.notificationText.text = [NSString stringWithFormat:@"This is row %d", indexPath.row];
   Notification *notification = self.notifications[indexPath.row];
   notificationCell.notificationText.attributedText = notification.notifText;
   [notificationCell.notificationText sizeToFit];
@@ -67,7 +71,7 @@
   
   [notificationCell.profilePic setImageWithURL:notification.userProfilePicURL];
   
-[notificationCell.notificationIcon setImage:notification.notifIconImage];
+  [notificationCell.notificationIcon setImage:notification.notifIconImage];
   
   return notificationCell;
 }
