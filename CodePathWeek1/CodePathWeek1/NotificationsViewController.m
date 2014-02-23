@@ -7,6 +7,9 @@
 //
 
 #import "NotificationsViewController.h"
+#import "notificationTableViewCell.h"
+#import "Notification.h"
+//#import "UIImageView+AFNetworking.h"
 
 @interface NotificationsViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *notifsTable;
@@ -20,10 +23,13 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+      self.title = @"Notifications";
+      self.notificationData = [Notification fakeNotifications];
       
-      self.notificationData = @[
-        @{@"username" : @"Aaron"},
-        @{@"username" : @"Claire"}];
+//      self.notificationData = @[
+//        @{@"notifText" : @"Aaron"},
+//        @{@"notifText" : @"Claire"}];
+      
     }
     return self;
 }
@@ -32,7 +38,15 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+  self.notifsTable.rowHeight = 120;
+  self.notifsTable.delegate = self;
   self.notifsTable.dataSource = self;
+  
+//  UITableViewCell *notifsTableViewCell = [[UITableViewCell alloc] init];
+  
+  // Register Class for Cell Reuse Identifier
+  [self.notifsTable registerClass:[UITableViewCell class] forCellReuseIdentifier:@"notificationTableViewCell"];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,17 +56,21 @@
 }
 
 #pragma mark - Table View Methods
+
 - (int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
   return self.notificationData.count;
+//  NSLog(@"%lu", (unsigned long)self.notificationData.count);
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-  UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
   
+  notificationTableViewCell *notifCell = [tableView dequeueReusableCellWithIdentifier:@"notificationTableViewCell"];
+
   NSDictionary *notif = self.notificationData[indexPath.row];
-  NSString *name = notif[@"username"];
-  cell.textLabel.text = [NSString stringWithFormat:@"Hello %@", name];
+  NSString *name = notif[@"notifText"];
+  notifCell.notificationText.text = [NSString stringWithFormat:@"%@", name];
   
-  return cell;
+  return notifCell;
 }
 
 @end

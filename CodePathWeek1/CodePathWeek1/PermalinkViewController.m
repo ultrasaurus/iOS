@@ -335,10 +335,10 @@
   
   //END HEIGHT OF STORYCARD
   storyCard.frame = CGRectMake(storyCard.frame.origin.x, storyCard.frame.origin.y, storyCard.frame.size.width, UFIContainer.frame.origin.y + UFIContainer.frame.size.height);
-  
+
   /////////////////////////
   //COMMENT FIELD CONTAINER
-  self.commentInputContainer = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 44, 320, 44)];
+  self.commentInputContainer = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 92, 320, 44)];
   self.commentInputContainer.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:.95];
 //  self.commentInputContainer.layer.shadowColor = [UIColor blackColor].CGColor;
 //  self.commentInputContainer.layer.shadowOffset = CGSizeMake(0, -.5);
@@ -430,7 +430,7 @@
                         delay:0.0
                       options:(animationCurve << 16)
                    animations:^{
-                     self.commentInputContainer.frame = CGRectMake(0, self.view.frame.size.height - 44, 320, 44);
+                     self.commentInputContainer.frame = CGRectMake(0, self.view.frame.size.height - 92, 320, 44);
                    }
                    completion:nil];
     self.tapRecognizer.enabled = NO;

@@ -41,6 +41,8 @@
 		D96B8EA618B1BF6200D13CBA /* PermalinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D96B8EA418B1BF6200D13CBA /* PermalinkViewController.m */; };
 		D96B8EA718B1BF6200D13CBA /* PermalinkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96B8EA518B1BF6200D13CBA /* PermalinkViewController.xib */; };
 		D96B8EAC18B1C33700D13CBA /* profilePicAaron@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96B8EAB18B1C33700D13CBA /* profilePicAaron@2x.png */; };
+		D989FB1018B5F3E3000F1E2A /* notificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D989FB0F18B5F3E3000F1E2A /* notificationTableViewCell.m */; };
+		D989FB6518B9111B000F1E2A /* Notification.m in Sources */ = {isa = PBXBuildFile; fileRef = D989FB6418B9111B000F1E2A /* Notification.m */; };
 		D9CF12D018B1BE4500B9F118 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9CF12CF18B1BE4500B9F118 /* Foundation.framework */; };
 		D9CF12D218B1BE4500B9F118 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9CF12D118B1BE4500B9F118 /* CoreGraphics.framework */; };
 		D9CF12D418B1BE4500B9F118 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9CF12D318B1BE4500B9F118 /* UIKit.framework */; };
@@ -103,6 +105,10 @@
 		D96B8EA418B1BF6200D13CBA /* PermalinkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermalinkViewController.m; sourceTree = "<group>"; };
 		D96B8EA518B1BF6200D13CBA /* PermalinkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PermalinkViewController.xib; sourceTree = "<group>"; };
 		D96B8EAB18B1C33700D13CBA /* profilePicAaron@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profilePicAaron@2x.png"; sourceTree = "<group>"; };
+		D989FB0E18B5F3E3000F1E2A /* notificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = notificationTableViewCell.h; sourceTree = "<group>"; };
+		D989FB0F18B5F3E3000F1E2A /* notificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = notificationTableViewCell.m; sourceTree = "<group>"; };
+		D989FB6318B9111B000F1E2A /* Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notification.h; sourceTree = "<group>"; };
+		D989FB6418B9111B000F1E2A /* Notification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notification.m; sourceTree = "<group>"; };
 		D9CF12CC18B1BE4500B9F118 /* CodePathWeek2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodePathWeek2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9CF12CF18B1BE4500B9F118 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D9CF12D118B1BE4500B9F118 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -182,6 +188,15 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		D989FB6218B90FFA000F1E2A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D989FB6318B9111B000F1E2A /* Notification.h */,
+				D989FB6418B9111B000F1E2A /* Notification.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		D9CF12C318B1BE4400B9F118 = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +232,7 @@
 		D9CF12D518B1BE4500B9F118 /* CodePathWeek1 */ = {
 			isa = PBXGroup;
 			children = (
+				D989FB6218B90FFA000F1E2A /* Models */,
 				D96B8EA818B1C2E500D13CBA /* Images */,
 				D9CF12DE18B1BE4500B9F118 /* AppDelegate.h */,
 				D9CF12DF18B1BE4500B9F118 /* AppDelegate.m */,
@@ -228,6 +244,8 @@
 				D900312D18B49E8B007240F4 /* NotificationsViewController.h */,
 				D900312E18B49E8B007240F4 /* NotificationsViewController.m */,
 				D900312F18B49E8B007240F4 /* NotificationsViewController.xib */,
+				D989FB0E18B5F3E3000F1E2A /* notificationTableViewCell.h */,
+				D989FB0F18B5F3E3000F1E2A /* notificationTableViewCell.m */,
 			);
 			path = CodePathWeek1;
 			sourceTree = "<group>";
@@ -422,9 +440,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D989FB6518B9111B000F1E2A /* Notification.m in Sources */,
 				D9CF12E018B1BE4500B9F118 /* AppDelegate.m in Sources */,
 				D900313018B49E8B007240F4 /* NotificationsViewController.m in Sources */,
 				D96B8EA618B1BF6200D13CBA /* PermalinkViewController.m in Sources */,
+				D989FB1018B5F3E3000F1E2A /* notificationTableViewCell.m in Sources */,
 				D9CF12DC18B1BE4500B9F118 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
