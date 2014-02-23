@@ -14,11 +14,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-  NotificationsViewController *nvc = [[NotificationsViewController alloc] init];
-  self.window.rootViewController = nvc;
+
+  UIColor *fbBar = [UIColor colorWithRed:(61/255.0) green:(95/255.0) blue:(152/255.0) alpha:1];
+  NSDictionary *navAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"HelveticaNeue-Medium" size:18.0f], NSFontAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName, nil];
   
-    self.window.backgroundColor = [UIColor whiteColor];
+
+  NotificationsViewController *nvc = [[NotificationsViewController alloc] init];
+  UINavigationController *nvcNavController = [[UINavigationController alloc] initWithRootViewController:nvc];
+  self.window.rootViewController = nvcNavController;
+  
+  [[UINavigationBar appearance] setTitleTextAttributes:navAttributes];
+  nvcNavController.navigationBar.barTintColor = fbBar;
+  nvcNavController.navigationBar.tintColor = [UIColor whiteColor];
+  nvcNavController.navigationBar.barStyle =UIBarStyleBlackTranslucent;
+  
+  self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
 }

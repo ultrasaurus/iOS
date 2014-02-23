@@ -10,11 +10,12 @@
 
 @interface Notification : NSObject
 
-@property (nonatomic, strong) NSString *notifText;
-@property (nonatomic, strong) NSString *notifIcon;
+@property (nonatomic, strong) NSAttributedString *notifText;
 @property (nonatomic, strong) NSString *timeStamp;
 @property (nonatomic, strong) NSString *userID;
-@property (nonatomic, strong) NSString *userProfilePicURL;
+@property (nonatomic, strong) NSURL *userProfilePicURL;
+
+@property (nonatomic, strong) UIImage *notifIconImage;
 
 - (id)initWithDictionary:(NSDictionary *)notifDictionary;
 + (NSArray *)notifsWithArray:(NSArray *)notifArray;

@@ -11,5 +11,9 @@
 @interface NotificationCell : UITableViewCell
 
 @property (strong, nonatomic) UILabel *notificationText;
+@property (strong, nonatomic) UILabel *timeStamp;
+@property (strong, nonatomic) UIImageView *notificationIcon;
+@property (strong, nonatomic) UIImageView *profilePic;
+
 
 @end

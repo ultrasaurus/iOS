@@ -9,6 +9,7 @@
 #import "NotificationsViewController.h"
 #import "NotificationCell.h"
 #import "Notification.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface NotificationsViewController ()
 
@@ -36,6 +37,7 @@
   
   self.tableView.dataSource = self;
   self.tableView.delegate = self;
+  [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
   
   [self.tableView registerClass:[NotificationCell class] forCellReuseIdentifier:@"NotificationCell"];
 
@@ -58,8 +60,29 @@
   NotificationCell *notificationCell = [tableView dequeueReusableCellWithIdentifier:@"NotificationCell"];
 //  notificationCell.notificationText.text = [NSString stringWithFormat:@"This is row %d", indexPath.row];
   Notification *notification = self.notifications[indexPath.row];
-  notificationCell.notificationText.text = notification.notifText;
+  notificationCell.notificationText.attributedText = notification.notifText;
+  [notificationCell.notificationText sizeToFit];
+  notificationCell.timeStamp.text = notification.timeStamp;
+  
+  [notificationCell.profilePic setImageWithURL:notification.userProfilePicURL];
+  
+[notificationCell.notificationIcon setImage:notification.notifIconImage];
+  
   return notificationCell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+  //  self.expanded = !self.expanded;
+}
+
+- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  if(indexPath.row == 0) {
+    return 76;
+  }else{
+    return 76;
+  }
 }
 
 @end
