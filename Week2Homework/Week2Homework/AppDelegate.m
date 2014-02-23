@@ -21,13 +21,28 @@
 
   NotificationsViewController *nvc = [[NotificationsViewController alloc] init];
   UINavigationController *nvcNavController = [[UINavigationController alloc] initWithRootViewController:nvc];
-  self.window.rootViewController = nvcNavController;
   
   [[UINavigationBar appearance] setTitleTextAttributes:navAttributes];
   nvcNavController.navigationBar.barTintColor = fbBar;
   nvcNavController.navigationBar.tintColor = [UIColor whiteColor];
   nvcNavController.navigationBar.barStyle =UIBarStyleBlackTranslucent;
   
+  UITabBarController *tabBarController = [[UITabBarController alloc] init];
+  
+  tabBarController.viewControllers = [NSArray arrayWithObjects:
+                                      nvcNavController,
+                                      nil];
+  
+  [[UITabBar appearance] setTintColor:[UIColor colorWithRed:86/255.0 green:148/255.0 blue:253/255.0 alpha:1]];
+  [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
+  
+  nvcNavController.tabBarItem = [[UITabBarItem alloc]
+                    initWithTitle:NSLocalizedString(@"Notifications", @"Notifications")
+                    image:[UIImage imageNamed:@"i_tab_notifications.png"]
+                    tag:3];
+
+  self.window.rootViewController = tabBarController;
+
   self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

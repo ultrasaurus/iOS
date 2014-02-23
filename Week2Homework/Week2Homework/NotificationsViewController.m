@@ -58,6 +58,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   
   NotificationCell *notificationCell = [tableView dequeueReusableCellWithIdentifier:@"NotificationCell"];
+  
 //  notificationCell.notificationText.text = [NSString stringWithFormat:@"This is row %d", indexPath.row];
   Notification *notification = self.notifications[indexPath.row];
   notificationCell.notificationText.attributedText = notification.notifText;
@@ -79,9 +80,9 @@
 
 - (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   if(indexPath.row == 0) {
-    return 76;
+    return 86;
   }else{
-    return 76;
+    return 86;
   }
 }
 

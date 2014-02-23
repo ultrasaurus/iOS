@@ -65,6 +65,18 @@
     @{@"notifText" : @"<span class='medium'>Kyle Meyer</span> commented on your photo: \"This is the Oakland location, right?\"",
       @"notifIcon" : @"comment",
       @"timeStamp" : @"9 hours ago",
+      @"userID" : @"kpmeyer"},
+    @{@"notifText" : @"<span class='medium'>Matej Hrescak</span> is nearby.",
+      @"notifIcon" : @"nearby",
+      @"timeStamp" : @"13 minutes ago",
+      @"userID" : @"hrescak"},
+    @{@"notifText" : @"<span class='medium'>Jonathon Toon</span> posted in <span class='medium'>iOS Bootcamp for Designers</span>: \"My work here is done.\"",
+      @"notifIcon" : @"group-apple",
+      @"timeStamp" : @"24 minutes ago",
+      @"userID" : @"jonathontoon"},
+    @{@"notifText" : @"<span class='medium'>Kyle Meyer</span> commented on your photo: \"This is the Oakland location, right?\"",
+      @"notifIcon" : @"comment",
+      @"timeStamp" : @"9 hours ago",
       @"userID" : @"kpmeyer"}
     ];
   return [Notification notifsWithArray:fakeNotificationsDictionaries];
@@ -72,7 +84,7 @@
 }
 
 - (NSString *)styledHTMLwithHTML:(NSString *)HTML {
-  NSString *style = @"<meta charset=\"UTF-8\"><style> body { font-family: 'HelveticaNeue'; font-size: 12px; line-height: 16px; } .medium {font-family: 'HelveticaNeue-Medium'; }</style>";
+  NSString *style = @"<meta charset=\"UTF-8\"><style> body { font-family: 'HelveticaNeue'; font-size: 14px; line-height: 16px; } .medium {font-family: 'HelveticaNeue-Medium'; }</style>";
   
   return [NSString stringWithFormat:@"%@%@", style, HTML];
 }
