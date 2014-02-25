@@ -103,5 +103,8 @@
 
   }
 }
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return @"Mark Read";
+}
 
 @end
