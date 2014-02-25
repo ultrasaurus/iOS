@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *stories;
+@property (strong, nonatomic) NSMutableArray *storyHeights;
 
 @end
 
@@ -69,11 +70,19 @@
   feedCell.timeStamp.text = story.timeStamp;
   feedCell.storyText.attributedText = story.story;
   [feedCell.storyText sizeToFit];
+  
+  NSLog(@"%f", feedCell.storyText.frame.size.height);
+  [self.storyHeights insertObject:@(feedCell.storyText.frame.size.height) atIndex:indexPath.row];
+  
   return feedCell;
 }
 
 - (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-  return 200;
+  
+//  NSLog(@"hi %f", [self.storyHeights[indexPath.row] floatValue]);
+//    return  [self.storyHeights[indexPath.row] floatValue];
+
+  return 140;
 }
 
 @end

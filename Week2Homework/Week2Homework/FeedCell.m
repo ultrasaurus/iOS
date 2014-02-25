@@ -61,13 +61,14 @@
       self.storyText.textColor = [UIColor darkGrayColor];
       self.storyText.lineBreakMode = NSLineBreakByWordWrapping;
       self.storyText.numberOfLines = 0;
+      [self.storyText sizeToFit];
 
       [self addSubview:self.storyText];
       
       
       //UFI
       //CONTAINER
-      self.UFIContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 160, self.frame.size.width, 36)];
+      self.UFIContainer = [[UIView alloc] initWithFrame:CGRectMake(0, self.storyText.frame.origin.y + self.storyText.frame.size.height, self.frame.size.width, 36)];
 //      self.UFIContainer.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
 //      self.UFIContainer.layer.shadowColor = [UIColor blackColor].CGColor;
 //      self.UFIContainer.layer.shadowOffset = CGSizeMake(0, -.5);
