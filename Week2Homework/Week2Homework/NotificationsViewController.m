@@ -13,8 +13,8 @@
 
 @interface NotificationsViewController ()
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) NSArray *notifications;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *notifications;
 
 @end
 

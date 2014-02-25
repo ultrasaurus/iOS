@@ -33,6 +33,7 @@
       self.notificationText.numberOfLines = 0;
 //      self.notificationText.backgroundColor = [UIColor redColor];
       [self addSubview:self.notificationText];
+
       
       self.notificationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(self.profilePic.frame.size.width + gutter + padding, self.profilePic.frame.size.height + padding - 16, 16, 16)];
       self.notificationIcon.backgroundColor = [UIColor lightGrayColor];
