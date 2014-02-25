@@ -14,7 +14,7 @@
 @interface NotificationsViewController ()
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *notifications;
+@property (strong, nonatomic) NSMutableArray *notifications;
 
 @end
 
@@ -87,6 +87,20 @@
     return 86;
   }else{
     return 86;
+  }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+  // Return YES if you want the specified item to be editable.
+  return YES;
+}
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (editingStyle == UITableViewCellEditingStyleDelete) {
+    //add code here for when you hit delete
+    [self.notifications removeObjectAtIndex:indexPath.row];
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+
   }
 }
 
