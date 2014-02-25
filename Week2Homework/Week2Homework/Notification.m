@@ -43,8 +43,8 @@
   return notifs;
 }
 
-+ (NSArray *)fakeNotifications{
-  NSArray *fakeNotificationsDictionaries =
++ (NSMutableArray *)fakeNotifications{
+  NSMutableArray *fakeNotificationsDictionaries =
   @[
     @{@"notifText" : @"<span class='medium'>Mark Zuckerberg</span> liked your post.",
       @"notifIcon" : @"like",

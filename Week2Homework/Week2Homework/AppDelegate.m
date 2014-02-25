@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "NotificationsViewController.h"
+#import "FeedViewController.h"
 
 @implementation AppDelegate
 
@@ -27,25 +28,39 @@
   nvcNavController.navigationBar.tintColor = [UIColor whiteColor];
   nvcNavController.navigationBar.barStyle =UIBarStyleBlackTranslucent;
   
+  FeedViewController *fvc = [[FeedViewController alloc] init];
+  UINavigationController *fvcNavController = [[UINavigationController alloc] initWithRootViewController:fvc];
+
+  fvcNavController.navigationBar.barTintColor = fbBar;
+  fvcNavController.navigationBar.tintColor = [UIColor whiteColor];
+  fvcNavController.navigationBar.barStyle =UIBarStyleBlackTranslucent;
+  
+
+  
   UITabBarController *tabBarController = [[UITabBarController alloc] init];
   
   tabBarController.viewControllers = [NSArray arrayWithObjects:
+                                      fvcNavController,
                                       nvcNavController,
                                       nil];
   
   [[UITabBar appearance] setTintColor:[UIColor colorWithRed:86/255.0 green:148/255.0 blue:253/255.0 alpha:1]];
   [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
-  
-  nvcNavController.tabBarItem = [[UITabBarItem alloc]
-                    initWithTitle:NSLocalizedString(@"Notifications", @"Notifications")
-                    image:[UIImage imageNamed:@"i_tab_notifications.png"]
-                    tag:3];
 
+  fvcNavController.tabBarItem = [[UITabBarItem alloc]
+                                 initWithTitle:NSLocalizedString(@"News Feed", @"News Feed")
+                                 image:[UIImage imageNamed:@"i_tab_newsfeed.png"]
+                                 tag:3];
+  nvcNavController.tabBarItem = [[UITabBarItem alloc]
+                                 initWithTitle:NSLocalizedString(@"Notifications", @"Notifications")
+                                 image:[UIImage imageNamed:@"i_tab_notifications.png"]
+                                 tag:3];
+  
   self.window.rootViewController = tabBarController;
 
   self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-    return YES;
+  [self.window makeKeyAndVisible];
+  return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

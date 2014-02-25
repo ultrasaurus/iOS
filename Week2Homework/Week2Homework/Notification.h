@@ -18,7 +18,7 @@
 @property (nonatomic, strong) UIImage *notifIconImage;
 
 - (id)initWithDictionary:(NSDictionary *)notifDictionary;
-+ (NSArray *)notifsWithArray:(NSArray *)notifArray;
-+ (NSArray *)fakeNotifications;
++ (NSMutableArray *)notifsWithArray:(NSMutableArray *)notifArray;
++ (NSMutableArray *)fakeNotifications;
 
 @end

@@ -25,16 +25,13 @@
       self.profilePic.clipsToBounds = YES;
       [self addSubview:self.profilePic];
       
-
       self.notificationText = [[UILabel alloc] initWithFrame:CGRectMake(self.profilePic.frame.size.width + padding + gutter, padding, self.frame.size.width - self.profilePic.frame.size.width - padding * 2 - gutter, 30)];
       self.notificationText.font = [UIFont systemFontOfSize:12];
       self.notificationText.textColor = [UIColor darkGrayColor];
       self.notificationText.lineBreakMode = NSLineBreakByWordWrapping;
       self.notificationText.numberOfLines = 0;
-//      self.notificationText.backgroundColor = [UIColor redColor];
       [self addSubview:self.notificationText];
 
-      
       self.notificationIcon = [[UIImageView alloc] initWithFrame:CGRectMake(self.profilePic.frame.size.width + gutter + padding, self.profilePic.frame.size.height + padding - 16, 16, 16)];
       self.notificationIcon.backgroundColor = [UIColor lightGrayColor];
       [self addSubview:self.notificationIcon];
