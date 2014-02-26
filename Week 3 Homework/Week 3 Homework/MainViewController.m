@@ -15,7 +15,6 @@
 @property (strong, nonatomic) UIScrollView *storiesScrollView;
 @property (strong, nonatomic) UIImageView *tabImageView;
 @property (strong, nonatomic) UILabel *feedHeaderLabel;
-
 @property (assign, nonatomic) CGPoint feedsViewCenter;
 @property (assign, nonatomic) CGPoint panStart;
 
@@ -64,8 +63,24 @@
   
   self.storiesScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 320, self.view.frame.size.width, 248)];
   self.storiesScrollView.backgroundColor = [UIColor grayColor];
-
+  [self.storiesScrollView setContentSize:CGSizeMake(1000, 248)];
   [self.feedsView addSubview:self.storiesScrollView];
+
+  UIView *story1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 148, 248)];
+  story1.backgroundColor = [UIColor blueColor];
+  [self.storiesScrollView addSubview:story1];
+
+  UIView *story2 = [[UIView alloc] initWithFrame:CGRectMake(152, 0, 148, 248)];
+  story2.backgroundColor = [UIColor blueColor];
+  [self.storiesScrollView addSubview:story2];
+
+  UIView *story3 = [[UIView alloc] initWithFrame:CGRectMake(304, 0, 148, 248)];
+  story3.backgroundColor = [UIColor blueColor];
+  [self.storiesScrollView addSubview:story3];
+  
+  UIView *story4 = [[UIView alloc] initWithFrame:CGRectMake(452, 0, 148, 248)];
+  story4.backgroundColor = [UIColor blueColor];
+  [self.storiesScrollView addSubview:story4];
   
   UIPanGestureRecognizer *panFeedsView = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPanFeed:)];
   [self.feedsView addGestureRecognizer:panFeedsView];
@@ -142,23 +157,40 @@
   CGPoint panDistance;
   CGPoint velocity = [panGestureRecognizer velocityInView:self.view];
   float newScale;
+  CGPoint newCenter;
   
   if (panGestureRecognizer.state == UIGestureRecognizerStateBegan){
     self.panStart = [panGestureRecognizer locationInView:self.view];
-  
+    panDistance.y = panLocation.y - self.panStart.y;
+    //http://stackoverflow.com/questions/345187/math-mapping-numbers
+    newScale = (panDistance.y - 0)/(-568-0) * (2.3-1) + 1;
+    newCenter.y = 568 - self.storiesScrollView.frame.size.height / 2;
+    newCenter.x = self.storiesScrollView.center.x;
   }else if(panGestureRecognizer.state == UIGestureRecognizerStateChanged){
     panDistance.y = panLocation.y - self.panStart.y;
-    newScale = (panDistance.y - 248)/(568-248) * (2.3-1) + 1;
+    newScale = (panDistance.y - 0)/(-568-0) * (2.3-.5) + .5;
+    newCenter.y = 568 - self.storiesScrollView.frame.size.height / 2;
+    newCenter.x = self.storiesScrollView.center.x;
   }else if(panGestureRecognizer.state == UIGestureRecognizerStateEnded){
     panDistance.y = panLocation.y - self.panStart.y;
-    newScale = (panDistance.y - 248)/(568-248) * (2.3-1) + 1;
+    newScale = (panDistance.y - 0)/(-568-0) * (2.3-1) + 1;
+    newCenter.y = 568 - self.storiesScrollView.frame.size.height / 2;
+    newCenter.x = self.storiesScrollView.center.x;
+    if (newScale < 1.35) {
+      newScale = 1;
+    }else{
+      newScale = 2.5;
+    }
   }
   NSLog(@"My velocity is: %f", velocity.y);
   [UIView animateWithDuration:.5 delay:0 usingSpringWithDamping:12 initialSpringVelocity:20 options:0 animations:^{
-    self.storiesScrollView.transform = CGAffineTransformMakeScale(newScale, newScale);
+    self.storiesScrollView.transform = CGAffineTransformMakeScale(newScale * 1.5, newScale * 1.5);
+    self.storiesScrollView.center = newCenter;
   } completion:^(BOOL finished) {
     
   }];
+  NSLog(@"My y is: %f and my height is: %f", self.storiesScrollView.frame.origin.y, self.storiesScrollView.frame.size.height);
+  self.storiesScrollView.center = newCenter;
 }
 
 @end
