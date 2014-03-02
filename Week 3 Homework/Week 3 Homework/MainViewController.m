@@ -18,6 +18,7 @@
 @property (assign, nonatomic) BOOL storiesScrolling;
 @property (assign, nonatomic) CGPoint feedsViewCenter;
 @property (assign, nonatomic) CGPoint panStart;
+@property (assign, nonatomic) CGPoint panOffset;
 @property (strong, nonatomic) UIPanGestureRecognizer *panStories;
 @property (strong, nonatomic) UIPanGestureRecognizer *panFeedsView;
 
@@ -194,6 +195,7 @@
 
   CGPoint panLocation = [panGestureRecognizer locationInView:self.view];
   CGPoint panDistance;
+  CGPoint adjustedPanLocation;
   CGPoint velocity = [panGestureRecognizer velocityInView:self.view];
   float newScale;
   CGRect newFrame;
@@ -201,8 +203,9 @@
   if (panGestureRecognizer.state == UIGestureRecognizerStateBegan){
     newFrame = self.storiesScrollView.frame;
     self.panStart = [panGestureRecognizer locationInView:self.view];
+    self.panOffset = CGPointMake(self.panStart.x, self.panStart.y - self.storiesScrollView.frame.origin.y);
     panDistance.y = panLocation.y - self.panStart.y;
-    newScale = (panDistance.y - 0)/(-320-0) * (maxScale-minScale) + minScale;
+    newScale = (panLocation.y - self.panOffset.y - 320)/(0-320) * (maxScale-minScale) + minScale;
     if (velocity.x != 0.0) {
       self.storiesScrolling = TRUE;
     }else{
@@ -212,13 +215,13 @@
   }else if(panGestureRecognizer.state == UIGestureRecognizerStateChanged){
     panDistance.y = panLocation.y - self.panStart.y;
 //    if (velocity.y < 0){
-      newScale = (panDistance.y - 0)/(-320-0) * (maxScale-minScale) + minScale;
+    newScale = (panLocation.y - self.panOffset.y - 320)/(0-320) * (maxScale-minScale) + minScale;
 //    }
     NSLog(@"My distance y: %f", panDistance.y);
   }else if(panGestureRecognizer.state == UIGestureRecognizerStateEnded){
     panDistance.y = panLocation.y - self.panStart.y;
-    newScale = (panDistance.y - 0)/(-320-0) * (maxScale-minScale) + minScale;
-    if (newScale < (maxScale - minScale) / 2) {
+    newScale = (panLocation.y - self.panOffset.y - 320)/(0-320) * (maxScale-minScale) + minScale;
+    if (newScale < ((maxScale - minScale) / 2) + minScale) {
       newScale = minScale;
     }else{
       newScale = maxScale;
