@@ -42,9 +42,10 @@
     [super viewDidLoad];
   [[UIApplication sharedApplication] setStatusBarHidden:YES
                                           withAnimation:UIStatusBarAnimationFade];
-
+  self.view.backgroundColor = [UIColor blackColor];
+  
   self.navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-  self.navView.backgroundColor = [UIColor darkGrayColor];
+  self.navView.backgroundColor = [UIColor greenColor];
   [self.view addSubview:self.navView];
   
   self.feedsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
@@ -53,7 +54,7 @@
   [self.view addSubview:self.feedsView];
 
   self.tabImageView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-  self.tabImageView.backgroundColor = [UIColor blueColor];
+  self.tabImageView.backgroundColor = [UIColor darkGrayColor];
   [self.feedsView addSubview:self.tabImageView];
 
   self.feedHeaderLabel = [[UILabel alloc] initWithFrame:CGRectMake(12, 6, 200, 30)];
@@ -68,24 +69,52 @@
   
   self.storiesScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 320, self.view.frame.size.width, 248)];
 //  self.storiesScrollView.backgroundColor = [UIColor grayColor];
-  [self.storiesScrollView setContentSize:CGSizeMake(4000, 248)];
+  [self.storiesScrollView setContentSize:CGSizeMake(1136, 248)];
   [self.feedsView addSubview:self.storiesScrollView];
 
-  UIView *story1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 148, 248)];
-  story1.backgroundColor = [UIColor whiteColor];
+  UIView *story1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 140, 248)];
+  story1.backgroundColor = [UIColor colorWithHue:.90 saturation:.90 brightness:.50 alpha:1];
   [self.storiesScrollView addSubview:story1];
-
-  UIView *story2 = [[UIView alloc] initWithFrame:CGRectMake(152, 0, 148, 248)];
-  story2.backgroundColor = [UIColor whiteColor];
-  [self.storiesScrollView addSubview:story2];
-
-  UIView *story3 = [[UIView alloc] initWithFrame:CGRectMake(304, 0, 148, 248)];
-  story3.backgroundColor = [UIColor whiteColor];
-  [self.storiesScrollView addSubview:story3];
+  UIView *profPic1 = [[UIView alloc] initWithFrame:CGRectMake(10, 10, 36, 36)];
+  profPic1.backgroundColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:.7];
+  [story1 addSubview:profPic1];
   
-  UIView *story4 = [[UIView alloc] initWithFrame:CGRectMake(452, 0, 148, 248)];
-  story4.backgroundColor = [UIColor whiteColor];
+  UIView *story2 = [[UIView alloc] initWithFrame:CGRectMake(142, 0, 140, 248)];
+  story2.backgroundColor = [UIColor colorWithHue:.85 saturation:.90 brightness:.50 alpha:1];
+  [self.storiesScrollView addSubview:story2];
+  UIView *profPic2 = [[UIView alloc] initWithFrame:CGRectMake(10, 10, 36, 36)];
+  profPic2.backgroundColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:.7];
+  [story2 addSubview:profPic2];
+
+  UIView *story3 = [[UIView alloc] initWithFrame:CGRectMake(284, 0, 140, 248)];
+  story3.backgroundColor = [UIColor colorWithHue:.80 saturation:.90 brightness:.50 alpha:1];
+  [self.storiesScrollView addSubview:story3];
+  UIView *profPic3 = [[UIView alloc] initWithFrame:CGRectMake(10, 10, 36, 36)];
+  profPic3.backgroundColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:.7];
+  [story3 addSubview:profPic3];
+  
+  UIView *story4 = [[UIView alloc] initWithFrame:CGRectMake(426, 0, 140, 248)];
+  story4.backgroundColor = [UIColor colorWithHue:.75 saturation:.90 brightness:.50 alpha:1];
   [self.storiesScrollView addSubview:story4];
+  UIView *profPic4 = [[UIView alloc] initWithFrame:CGRectMake(10, 10, 36, 36)];
+  profPic4.backgroundColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:.7];
+  [story4 addSubview:profPic4];
+
+  UIView *story5 = [[UIView alloc] initWithFrame:CGRectMake(568, 0, 140, 248)];
+  story5.backgroundColor = [UIColor colorWithHue:.70 saturation:.90 brightness:.50 alpha:1];
+  [self.storiesScrollView addSubview:story5];
+  
+  UIView *story6 = [[UIView alloc] initWithFrame:CGRectMake(710, 0, 140, 248)];
+  story6.backgroundColor = [UIColor colorWithHue:.65 saturation:.90 brightness:.50 alpha:1];
+  [self.storiesScrollView addSubview:story6];
+  
+  UIView *story7 = [[UIView alloc] initWithFrame:CGRectMake(852, 0, 140, 248)];
+  story7.backgroundColor = [UIColor colorWithHue:.60 saturation:.90 brightness:.50 alpha:1];
+  [self.storiesScrollView addSubview:story7];
+
+  UIView *story8 = [[UIView alloc] initWithFrame:CGRectMake(994, 0, 140, 248)];
+  story8.backgroundColor = [UIColor colorWithHue:.55 saturation:.90 brightness:.50 alpha:1];
+  [self.storiesScrollView addSubview:story8];
   
   // Drag the main feed container up and down
   self.panFeedsView = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onPanFeed:)];
@@ -121,20 +150,16 @@
   if (panGestureRecognizer.state == UIGestureRecognizerStateBegan){
     self.panStart = [panGestureRecognizer locationInView:self.view];
     self.feedsViewCenter = self.feedsView.center;
-  //  newCenter.y = self.feedsViewCenter.y + panDistance.y;
-  //  newCenter.x = 160;
   }else if(panGestureRecognizer.state == UIGestureRecognizerStateChanged){
     panDistance.y = panLocation.y - self.panStart.y;
     
     if (self.feedsView.center.y < 284) {
       float dampeningMultiplier = ((self.feedsView.center.y - 284) * .4) / (-284) + .1;
-//      NSLog(@"MY DAMPENING MULTIPLIER : %f", dampeningMultiplier);
       panDistance.y = panDistance.y * dampeningMultiplier;
     }
     newCenter.y = self.feedsViewCenter.y + panDistance.y;
     newCenter.x = 160;
     
-//    NSLog(@"StateChanged: %f", newCenter.y);
   }else if(panGestureRecognizer.state == UIGestureRecognizerStateEnded){
     panDistance.y = panLocation.y - self.panStart.y;
     
@@ -155,7 +180,6 @@
       }
     }
   }
-//  NSLog(@"My velocity is: %f", velocity.y);
   [UIView animateWithDuration:.5 delay:0 usingSpringWithDamping:12 initialSpringVelocity:20 options:0 animations:^{
     self.feedsView.center = newCenter;
   } completion:^(BOOL finished) {
@@ -163,45 +187,44 @@
   }];
 }
 
-// Scale 
+// Scale the stories
 - (void)onPanStories:(UIPanGestureRecognizer *)panGestureRecognizer{
+  float maxScale = 2.29;
+  float minScale = 1;
+
   CGPoint panLocation = [panGestureRecognizer locationInView:self.view];
   CGPoint panDistance;
   CGPoint velocity = [panGestureRecognizer velocityInView:self.view];
   float newScale;
-  CGPoint newCenter;
   CGRect newFrame;
 
   if (panGestureRecognizer.state == UIGestureRecognizerStateBegan){
     newFrame = self.storiesScrollView.frame;
     self.panStart = [panGestureRecognizer locationInView:self.view];
     panDistance.y = panLocation.y - self.panStart.y;
-    //http://stackoverflow.com/questions/345187/math-mapping-numbers
-    newScale = (panDistance.y - 0)/(-self.view.frame.size.height-0) * (2.3-1) + 1;
-//    newCenter.y = self.view.frame.size.height - self.storiesScrollView.frame.size.height / 2;
-//    newCenter.x = self.storiesScrollView.center.x;
-    NSLog(@"On begin the velocity is %f", velocity.x);
+    newScale = (panDistance.y - 0)/(-320-0) * (maxScale-minScale) + minScale;
     if (velocity.x != 0.0) {
       self.storiesScrolling = TRUE;
-    }else{ self.storiesScrolling = FALSE; }
+    }else{
+      self.storiesScrolling = FALSE;
+    }
+
   }else if(panGestureRecognizer.state == UIGestureRecognizerStateChanged){
     panDistance.y = panLocation.y - self.panStart.y;
-    newScale = (panDistance.y - 0)/(-self.view.frame.size.height-0) * (2.3-.5) + .5;
-    newCenter.y = self.view.frame.size.height - self.storiesScrollView.frame.size.height / 2;
-    newCenter.x = self.storiesScrollView.center.x;
-    NSLog(@"MY WIDTH: %f", self.storiesScrollView.frame.size.width);
+//    if (velocity.y < 0){
+      newScale = (panDistance.y - 0)/(-320-0) * (maxScale-minScale) + minScale;
+//    }
+    NSLog(@"My distance y: %f", panDistance.y);
   }else if(panGestureRecognizer.state == UIGestureRecognizerStateEnded){
     panDistance.y = panLocation.y - self.panStart.y;
-    newScale = (panDistance.y - 0)/(-self.view.frame.size.height-0) * (2.3-1) + 1;
-    newCenter.y = self.view.frame.size.height - self.storiesScrollView.frame.size.height / 2;
-    newCenter.x = self.storiesScrollView.center.x;
-    if (newScale < 1.35) {
-      newScale = 1;
+    newScale = (panDistance.y - 0)/(-320-0) * (maxScale-minScale) + minScale;
+    if (newScale < (maxScale - minScale) / 2) {
+      newScale = minScale;
     }else{
-      newScale = 2.5;
+      newScale = maxScale;
     }
   }
-//  NSLog(@"My velocity is: %f", velocity.y);
+  if (newScale < .5){ newScale = .5; }
   newFrame.origin.x = 0;
   newFrame.origin.y = self.view.frame.size.height - (248 * newScale);
   newFrame.size.width = self.view.frame.size.width;
@@ -209,14 +232,11 @@
   [UIView animateWithDuration:.5 delay:0 usingSpringWithDamping:12 initialSpringVelocity:20 options:0 animations:^{
     if (self.storiesScrolling == FALSE) {
       self.storiesScrollView.transform = CGAffineTransformMakeScale(newScale, newScale);
-//      self.storiesScrollView.center = newCenter;
       self.storiesScrollView.frame = newFrame;
     }
   } completion:^(BOOL finished) {
-    
+  //    NSLog(@"Story1 height is %f", story1.frame.size.height);
   }];
-//  NSLog(@"My y is: %f and my height is: %f", self.storiesScrollView.frame.origin.y, self.storiesScrollView.frame.size.height);
-//  self.storiesScrollView.center = newCenter;
 }
 
 //implement this method - slideViewGestureRecognizer is the one for sliding the headline up and down.
