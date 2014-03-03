@@ -19,9 +19,10 @@
 @property (assign, nonatomic) CGPoint feedsViewCenter;
 @property (assign, nonatomic) CGPoint panStart;
 @property (assign, nonatomic) CGPoint panOffset;
+@property (assign, nonatomic) float storiesContentOffset;
 @property (strong, nonatomic) UIPanGestureRecognizer *panStories;
 @property (strong, nonatomic) UIPanGestureRecognizer *panFeedsView;
-
+@property (strong, nonatomic) UIView *story1;
 - (void)onPanFeed:(UIPanGestureRecognizer *)panGestureRecognizer;
 - (void)onPanStories:(UIPanGestureRecognizer *)panGestureRecognizer;
 
@@ -73,12 +74,12 @@
   [self.storiesScrollView setContentSize:CGSizeMake(1136, 248)];
   [self.feedsView addSubview:self.storiesScrollView];
 
-  UIView *story1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 140, 248)];
-  story1.backgroundColor = [UIColor colorWithHue:.90 saturation:.90 brightness:.50 alpha:1];
-  [self.storiesScrollView addSubview:story1];
+  self.story1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 140, 248)];
+  self.story1.backgroundColor = [UIColor colorWithHue:.90 saturation:.90 brightness:.50 alpha:1];
+  [self.storiesScrollView addSubview:self.story1];
   UIView *profPic1 = [[UIView alloc] initWithFrame:CGRectMake(10, 10, 36, 36)];
   profPic1.backgroundColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:.7];
-  [story1 addSubview:profPic1];
+  [self.story1 addSubview:profPic1];
   
   UIView *story2 = [[UIView alloc] initWithFrame:CGRectMake(142, 0, 140, 248)];
   story2.backgroundColor = [UIColor colorWithHue:.85 saturation:.90 brightness:.50 alpha:1];
@@ -151,11 +152,22 @@
   if (panGestureRecognizer.state == UIGestureRecognizerStateBegan){
     self.panStart = [panGestureRecognizer locationInView:self.view];
     self.feedsViewCenter = self.feedsView.center;
+    panDistance.y = panLocation.y - self.panStart.y;
+    
+    if (self.feedsView.center.y < 284) {
+//      float dampeningMultiplier = ((self.feedsView.center.y - 284) * .4) / (-284) + .1;
+      float dampeningMultiplier = .4;
+      panDistance.y = panDistance.y * dampeningMultiplier;
+    }
+    newCenter.y = self.feedsViewCenter.y + panDistance.y;
+    newCenter.x = 160;
+    
   }else if(panGestureRecognizer.state == UIGestureRecognizerStateChanged){
     panDistance.y = panLocation.y - self.panStart.y;
     
     if (self.feedsView.center.y < 284) {
-      float dampeningMultiplier = ((self.feedsView.center.y - 284) * .4) / (-284) + .1;
+//      float dampeningMultiplier = ((self.feedsView.center.y - 284) * .4) / (-284) + .1;
+      float dampeningMultiplier = .4;
       panDistance.y = panDistance.y * dampeningMultiplier;
     }
     newCenter.y = self.feedsViewCenter.y + panDistance.y;
@@ -195,13 +207,13 @@
 
   CGPoint panLocation = [panGestureRecognizer locationInView:self.view];
   CGPoint panDistance;
-  CGPoint adjustedPanLocation;
   CGPoint velocity = [panGestureRecognizer velocityInView:self.view];
   float newScale;
   CGRect newFrame;
 
   if (panGestureRecognizer.state == UIGestureRecognizerStateBegan){
     newFrame = self.storiesScrollView.frame;
+    self.storiesContentOffset = self.story1.frame.size.width;
     self.panStart = [panGestureRecognizer locationInView:self.view];
     self.panOffset = CGPointMake(self.panStart.x, self.panStart.y - self.storiesScrollView.frame.origin.y);
     panDistance.y = panLocation.y - self.panStart.y;
@@ -211,35 +223,61 @@
     }else{
       self.storiesScrolling = FALSE;
     }
+    /////////////////////
+    if (newScale < .5){ newScale = .5; }
+    newFrame.origin.x = 0;
+    newFrame.origin.y = self.view.frame.size.height - (248 * newScale);
+    newFrame.size.width = self.view.frame.size.width;
+    newFrame.size.height = 248 * newScale;
+    if (self.storiesScrolling == FALSE) {
+      self.storiesScrollView.transform = CGAffineTransformMakeScale(newScale, newScale);
+      self.storiesScrollView.frame = newFrame;
+      // add or subtract the number of pixels offset by the growth since the last change
+      self.storiesScrollView.contentOffset = CGPointMake(self.storiesScrollView.contentOffset.x - (newScale), self.storiesScrollView.contentOffset.y);
+    }
 
   }else if(panGestureRecognizer.state == UIGestureRecognizerStateChanged){
     panDistance.y = panLocation.y - self.panStart.y;
-//    if (velocity.y < 0){
+    self.storiesContentOffset -= self.story1.frame.size.width;
     newScale = (panLocation.y - self.panOffset.y - 320)/(0-320) * (maxScale-minScale) + minScale;
-//    }
-    NSLog(@"My distance y: %f", panDistance.y);
+    /////////////////////
+    if (newScale < .5){ newScale = .5; }
+    newFrame.origin.x = 0;
+    newFrame.origin.y = self.view.frame.size.height - (248 * newScale);
+    newFrame.size.width = self.view.frame.size.width;
+    newFrame.size.height = 248 * newScale;
+    if (self.storiesScrolling == FALSE) {
+      self.storiesScrollView.transform = CGAffineTransformMakeScale(newScale, newScale);
+      self.storiesScrollView.frame = newFrame;
+      // add or subtract the number of pixels offset by the growth since the last change
+      self.storiesScrollView.contentOffset = CGPointMake(self.storiesScrollView.contentOffset.x - (newScale), self.storiesScrollView.contentOffset.y);
+    }
+
   }else if(panGestureRecognizer.state == UIGestureRecognizerStateEnded){
     panDistance.y = panLocation.y - self.panStart.y;
+    self.storiesContentOffset = self.story1.frame.size.width - 140;
     newScale = (panLocation.y - self.panOffset.y - 320)/(0-320) * (maxScale-minScale) + minScale;
     if (newScale < ((maxScale - minScale) / 2) + minScale) {
       newScale = minScale;
     }else{
       newScale = maxScale;
     }
-  }
-  if (newScale < .5){ newScale = .5; }
-  newFrame.origin.x = 0;
-  newFrame.origin.y = self.view.frame.size.height - (248 * newScale);
-  newFrame.size.width = self.view.frame.size.width;
-  newFrame.size.height = 248 * newScale;
-  [UIView animateWithDuration:.5 delay:0 usingSpringWithDamping:12 initialSpringVelocity:20 options:0 animations:^{
+    /////////////////////
+    if (newScale < .5){ newScale = .5; }
+    newFrame.origin.x = 0;
+    newFrame.origin.y = self.view.frame.size.height - (248 * newScale);
+    newFrame.size.width = self.view.frame.size.width;
+    newFrame.size.height = 248 * newScale;
     if (self.storiesScrolling == FALSE) {
-      self.storiesScrollView.transform = CGAffineTransformMakeScale(newScale, newScale);
+      [UIView animateWithDuration:.5 delay:0 usingSpringWithDamping:12 initialSpringVelocity:20 options:0 animations:^{
+          self.storiesScrollView.transform = CGAffineTransformMakeScale(newScale, newScale);
+          // add or subtract the number of pixels offset by the growth since the last change
+          self.storiesScrollView.contentOffset = CGPointMake(self.storiesScrollView.contentOffset.x - (newScale), self.storiesScrollView.contentOffset.y);
+      } completion:^(BOOL finished) {}];
       self.storiesScrollView.frame = newFrame;
     }
-  } completion:^(BOOL finished) {
-  //    NSLog(@"Story1 height is %f", story1.frame.size.height);
-  }];
+  }
+
 }
 
 //implement this method - slideViewGestureRecognizer is the one for sliding the headline up and down.
