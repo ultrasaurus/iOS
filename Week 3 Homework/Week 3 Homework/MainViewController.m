@@ -238,7 +238,11 @@
     }
     newCenter.y = self.feedsViewCenter.y + panDistance.y;
     newCenter.x = 160;
-    
+    ///////////////////
+    float navViewScale = .96 + (1 - .96) * ((newCenter.y - self.view.center.y) / self.view.frame.size.height);
+    self.feedsView.center = newCenter;
+    self.navView.alpha = (newCenter.y - self.view.center.y) / self.view.frame.size.height;
+    self.navView.transform = CGAffineTransformMakeScale(navViewScale, navViewScale);
   }else if(panGestureRecognizer.state == UIGestureRecognizerStateChanged){
     panDistance.y = panLocation.y - self.panStart.y;
     
@@ -249,6 +253,11 @@
     }
     newCenter.y = self.feedsViewCenter.y + panDistance.y;
     newCenter.x = 160;
+    ///////////////////
+    float navViewScale = .96 + (1 - .96) * ((newCenter.y - self.view.center.y) / self.view.frame.size.height);
+    self.feedsView.center = newCenter;
+    self.navView.alpha = (newCenter.y - self.view.center.y + 200) / self.view.frame.size.height;
+    self.navView.transform = CGAffineTransformMakeScale(navViewScale, navViewScale);
     
   }else if(panGestureRecognizer.state == UIGestureRecognizerStateEnded){
     panDistance.y = panLocation.y - self.panStart.y;
@@ -269,15 +278,15 @@
         newCenter.y = 808;
       }
     }
+    ///////////////////
+    float navViewScale = .96 + (1 - .96) * ((newCenter.y - self.view.center.y) / self.view.frame.size.height);
+    [UIView animateWithDuration:.5 delay:0 usingSpringWithDamping:12 initialSpringVelocity:20 options:0 animations:^{
+      self.feedsView.center = newCenter;
+      self.navView.alpha = (newCenter.y - self.view.center.y) / self.view.frame.size.height;
+      self.navView.transform = CGAffineTransformMakeScale(navViewScale, navViewScale);
+    } completion:^(BOOL finished) {}];
   }
-  float navViewScale = .96 + (1 - .96) * ((newCenter.y - self.view.center.y) / self.view.frame.size.height);
-  [UIView animateWithDuration:.5 delay:0 usingSpringWithDamping:12 initialSpringVelocity:20 options:0 animations:^{
-    self.feedsView.center = newCenter;
-    self.navView.alpha = (newCenter.y - self.view.center.y + 200) / self.view.frame.size.height;
-    self.navView.transform = CGAffineTransformMakeScale(navViewScale, navViewScale);
-  } completion:^(BOOL finished) {
-    
-  }];
+
 }
 
 // Scale the stories
