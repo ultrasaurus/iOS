@@ -73,9 +73,14 @@
   self.feedHeaderLabel.text = @"Facebook";
   self.feedHeaderLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:22];
   self.feedHeaderLabel.textColor = [UIColor whiteColor];
-  self.feedHeaderLabel.shadowColor = [UIColor blackColor];
-  self.feedHeaderLabel.shadowOffset = CGSizeMake(0, 1);
+//  self.feedHeaderLabel.shadowColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.5];
+//  self.feedHeaderLabel.shadowOffset = CGSizeMake(0, 1);
+  self.feedHeaderLabel.layer.shadowRadius = 2;
+  self.feedHeaderLabel.layer.shadowOffset = CGSizeMake(0, 1);
+  self.feedHeaderLabel.layer.shadowOpacity = .35;
+  self.feedHeaderLabel.layer.shadowRadius = .5;
 
+  
   //  self.feedHeaderLabel.backgroundColor = [UIColor ];
   [self.tabImageView addSubview:self.feedHeaderLabel];
   
@@ -282,16 +287,18 @@
     float navViewScale = .96 + (1 - .96) * ((newCenter.y - self.view.center.y) / self.view.frame.size.height);
     [UIView animateWithDuration:.5 delay:0 usingSpringWithDamping:12 initialSpringVelocity:20 options:0 animations:^{
       self.feedsView.center = newCenter;
-      self.navView.alpha = (newCenter.y - self.view.center.y) / self.view.frame.size.height;
+      self.navView.alpha = (newCenter.y - self.view.center.y + 200) / self.view.frame.size.height;
       self.navView.transform = CGAffineTransformMakeScale(navViewScale, navViewScale);
-    } completion:^(BOOL finished) {}];
+    } completion:^(BOOL finished) {
+      self.navView.alpha = self.navView.alpha < .5 ? 0 : 1;
+    }];
   }
 
 }
 
 // Scale the stories
 - (void)onPanStories:(UIPanGestureRecognizer *)panGestureRecognizer{
-  float maxScale = 2.29;
+  float maxScale = 2.285;
   float minScale = 1;
 
   CGPoint panLocation = [panGestureRecognizer locationInView:self.view];
@@ -311,12 +318,13 @@
     self.panOffset = CGPointMake(self.panStart.x, self.panStart.y - self.storiesScrollView.frame.origin.y);
     panDistance.y = panLocation.y - self.panStart.y;
     newScale = (panLocation.y - self.panOffset.y - 320)/(0-320) * (maxScale-minScale) + minScale;
-    if (velocity.y == 0.0) {
+    if (abs(velocity.y) < abs(velocity.x)) {
       self.storiesScrolling = TRUE;
     }else{
       self.storiesScrolling = FALSE;
     }
     /////////////////////
+//    if (newScale < 1){ newScale = newScale * 1.5; }
     if (newScale < .5){ newScale = .5; }
     newFrame.origin.x = 0;
     newFrame.origin.y = self.view.frame.size.height - (248 * newScale);
@@ -336,7 +344,7 @@
 
     newScale = (panLocation.y - self.panOffset.y - 320)/(0-320) * (maxScale-minScale) + minScale;
     /////////////////////
-    if (newScale < .5){ newScale = .5; }
+    if (newScale < 1){ newScale = .5; }
     newFrame.origin.x = 0;
     newFrame.origin.y = self.view.frame.size.height - (248 * newScale);
     newFrame.size.width = self.view.frame.size.width;
@@ -346,11 +354,11 @@
     if (self.storiesScrolling == FALSE) {
       self.storiesScrollView.transform = CGAffineTransformMakeScale(newScale, newScale);
       self.storiesScrollView.frame = newFrame;
-      self.tabImageView.alpha = newFrame.origin.y / 320;
+      self.tabImageView.alpha = newFrame.origin.y / 200;
       self.tabImageView.transform = CGAffineTransformMakeScale(tabViewScale, tabViewScale);
 
       // add or subtract the number of pixels offset by the growth since the last change
-//      self.storiesScrollView.contentOffset = newScrollOffset;
+      // self.storiesScrollView.contentOffset = newScrollOffset;
     }
 
   }else if(panGestureRecognizer.state == UIGestureRecognizerStateEnded){
@@ -377,7 +385,7 @@
           // add or subtract the number of pixels offset by the growth since the last change
           // self.storiesScrollView.contentOffset = newScrollOffset;
         self.storiesScrollView.frame = newFrame;
-        self.tabImageView.alpha = newFrame.origin.y / 350;
+        self.tabImageView.alpha = newFrame.origin.y / 200;
         self.tabImageView.transform = CGAffineTransformMakeScale(tabViewScale, tabViewScale);
 
       } completion:^(BOOL finished) {}];
