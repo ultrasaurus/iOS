@@ -20,6 +20,7 @@
 		D9261DE518BD858D006D56C2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9261DE318BD858D006D56C2 /* InfoPlist.strings */; };
 		D9261DE718BD858D006D56C2 /* Week_3_HomeworkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9261DE618BD858D006D56C2 /* Week_3_HomeworkTests.m */; };
 		D9261DF218BD85B9006D56C2 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9261DF118BD85B9006D56C2 /* MainViewController.m */; };
+		D9B30DE618C8576400613A65 /* SectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B30DE518C8576400613A65 /* SectionsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		D9261DE618BD858D006D56C2 /* Week_3_HomeworkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Week_3_HomeworkTests.m; sourceTree = "<group>"; };
 		D9261DF018BD85B9006D56C2 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		D9261DF118BD85B9006D56C2 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		D9B30DE418C8576400613A65 /* SectionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionsViewController.h; sourceTree = "<group>"; };
+		D9B30DE518C8576400613A65 /* SectionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +119,8 @@
 				D9261DC818BD858D006D56C2 /* Supporting Files */,
 				D9261DF018BD85B9006D56C2 /* MainViewController.h */,
 				D9261DF118BD85B9006D56C2 /* MainViewController.m */,
+				D9B30DE418C8576400613A65 /* SectionsViewController.h */,
+				D9B30DE518C8576400613A65 /* SectionsViewController.m */,
 			);
 			path = "Week 3 Homework";
 			sourceTree = "<group>";
@@ -246,6 +251,7 @@
 			files = (
 				D9261DD218BD858D006D56C2 /* AppDelegate.m in Sources */,
 				D9261DF218BD85B9006D56C2 /* MainViewController.m in Sources */,
+				D9B30DE618C8576400613A65 /* SectionsViewController.m in Sources */,
 				D9261DCE18BD858D006D56C2 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,10 +7,12 @@
 //
 
 #import "MainViewController.h"
+#import "SectionsViewController.h"
 
 @interface MainViewController ()
 
 @property (strong, nonatomic) UIView *navView;
+@property (strong, nonatomic) UIControl *editSections;
 @property (strong, nonatomic) UIView *feedsView;
 @property (strong, nonatomic) UIScrollView *storiesScrollView;
 @property (strong, nonatomic) UIView *tabImageView;
@@ -27,6 +29,8 @@
 
 - (void)onPanFeed:(UIPanGestureRecognizer *)panGestureRecognizer;
 - (void)onPanStories:(UIPanGestureRecognizer *)panGestureRecognizer;
+- (void)onEditSections:(id)sender;
+- (void)onTapEditSections:(id)sender;
 
 @end
 
@@ -51,9 +55,24 @@
   self.navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
   self.navView.backgroundColor = [UIColor greenColor];
   [self.view addSubview:self.navView];
-  UIImageView *navImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navImage"]];
+  UIImageView *navImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CoverPhoto"]];
+  navImageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+  navImageView.contentMode = UIViewContentModeScaleAspectFill;
   [self.navView addSubview:navImageView];
   self.navView.alpha = 0;
+  
+  self.editSections = [[UIControl alloc] initWithFrame:CGRectMake(10, 200, self.view.frame.size.width - 20, 80)];
+//  editSections.backgroundColor = [UIColor whiteColor];
+  [self.navView addSubview:self.editSections];
+  
+  [self.editSections addTarget:self action:@selector(onTapEditSections:) forControlEvents:UIControlEventTouchDown];
+  [self.editSections addTarget:self action:@selector(onEditSections:) forControlEvents:UIControlEventTouchUpInside];
+  
+  UILabel *editSectionsLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 10, self.view.frame.size.width - 80, 55)];
+  editSectionsLabel.text = @"Edit Sections";
+  editSectionsLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:20];
+  editSectionsLabel.textColor = [UIColor whiteColor];
+  [self.editSections addSubview:editSectionsLabel];
   
   self.feedsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
 //  self.feedsView.backgroundColor = [UIColor darkGrayColor];
@@ -401,6 +420,17 @@
   return NO;
 }
 
+- (void)onEditSections:(id)sender{
+  NSLog(@"HELLO WORLD");
+  UIViewController *svc = [[SectionsViewController alloc] init];
+  UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:svc];
+  navigationController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+//  svc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 
+  [self presentViewController:navigationController animated:YES completion:nil];
+}
+- (void)onTapEditSections:(id)sender{
+//  NSLog(@"HELLO WORLD");
+}
 
 @end
