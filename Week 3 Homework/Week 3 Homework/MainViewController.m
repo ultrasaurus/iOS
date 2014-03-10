@@ -65,9 +65,16 @@
   self.navTableView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
   [self.navView addSubview:self.navTableView];
   
-  self.editSections = [[UIControl alloc] initWithFrame:CGRectMake(10, 200, self.view.frame.size.width - 20, 80)];
+  self.editSections = [[UIControl alloc] initWithFrame:CGRectMake(10, 64, self.view.frame.size.width - 20, 80)];
 //  editSections.backgroundColor = [UIColor whiteColor];
   [self.navTableView addSubview:self.editSections];
+
+  UIView *border1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 1)];
+  border1.backgroundColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:.8];
+  [self.editSections addSubview:border1];
+  UIView *border2 = [[UIView alloc] initWithFrame:CGRectMake(0, self.editSections.frame.size.height - 1, 300, 1)];
+  border2.backgroundColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:.8];
+  [self.editSections addSubview:border2];
   
   [self.editSections addTarget:self action:@selector(onTapEditSections:) forControlEvents:UIControlEventTouchDown];
   [self.editSections addTarget:self action:@selector(onEditSections:) forControlEvents:UIControlEventTouchUpInside];
@@ -246,8 +253,8 @@
   if (self.feedsView) {
     [UIView animateWithDuration:.75 delay:.25 usingSpringWithDamping:12 initialSpringVelocity:14 options:0 animations:^{
       self.feedsView.center = CGPointMake(160, 284);
-    } completion:^(BOOL finished) {
-    }];
+      self.navView.alpha = 0;
+    } completion:^(BOOL finished) {}];
   }
 }
 #pragma mark- Gesture Methods
@@ -431,19 +438,23 @@
 }
 
 - (void)onEditSections:(id)sender{
-  NSLog(@"HELLO WORLD");
+
   UIViewController *svc = [[SectionsViewController alloc] init];
   UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:svc];
   navigationController.navigationBar.tintColor = [UIColor whiteColor];
-  navigationController.navigationBar.barTintColor = [UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:160.0/255.0 alpha:1];
+  navigationController.navigationBar.barTintColor = [UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:165.0/255.0 alpha:1];
   navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
   
   
-//  navigationController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+
   navigationController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-//  svc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-//  [self presentViewController:navigationController animated:YES completion:nil];
-  [self presentViewController:navigationController animated:YES completion:NULL];
+  [UIView animateWithDuration:.25 delay:0 usingSpringWithDamping:12 initialSpringVelocity:14 options:0 animations:^{
+    self.feedsView.center = CGPointMake(160, 854);
+  } completion:^(BOOL finished) {
+    [self presentViewController:navigationController animated:YES completion:NULL];
+  }];
+
+
 }
 - (void)onTapEditSections:(id)sender{
 //  NSLog(@"HELLO WORLD");
