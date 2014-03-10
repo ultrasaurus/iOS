@@ -211,9 +211,7 @@
         } completion:^(BOOL finished) {
           [UIView animateWithDuration:.75 delay:0 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAutoreverse|UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionRepeat animations:^{
             firstChild.transform = CGAffineTransformMakeRotation(M_PI/180);
-          } completion:^(BOOL finished) {
-          }];
-
+          } completion:^(BOOL finished) {}];
         }];
       }
     }];
