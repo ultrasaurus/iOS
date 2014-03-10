@@ -317,7 +317,7 @@
     [UIView animateWithDuration:.5 delay:0 usingSpringWithDamping:12 initialSpringVelocity:20 options:0 animations:^{
       self.feedsView.center = newCenter;
       self.navView.alpha = (newCenter.y - self.view.center.y + 200) / self.view.frame.size.height;
-      self.navView.transform = CGAffineTransformMakeScale(navViewScale, navViewScale);
+      self.navTableView.transform = CGAffineTransformMakeScale(navViewScale, navViewScale);
     } completion:^(BOOL finished) {
       self.navView.alpha = self.navView.alpha < .5 ? 0 : 1;
     }];
@@ -434,7 +434,11 @@
   NSLog(@"HELLO WORLD");
   UIViewController *svc = [[SectionsViewController alloc] init];
   UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:svc];
-
+  navigationController.navigationBar.tintColor = [UIColor whiteColor];
+  navigationController.navigationBar.barTintColor = [UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:160.0/255.0 alpha:1];
+  navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+  
+  
 //  navigationController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
   navigationController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 //  svc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
