@@ -12,6 +12,7 @@
 @interface MainViewController ()
 
 @property (strong, nonatomic) UIView *navView;
+@property (strong, nonatomic) UIView *navTableView;
 @property (strong, nonatomic) UIControl *editSections;
 @property (strong, nonatomic) UIView *feedsView;
 @property (strong, nonatomic) UIScrollView *storiesScrollView;
@@ -61,9 +62,12 @@
   [self.navView addSubview:navImageView];
   self.navView.alpha = 0;
   
+  self.navTableView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+  [self.navView addSubview:self.navTableView];
+  
   self.editSections = [[UIControl alloc] initWithFrame:CGRectMake(10, 200, self.view.frame.size.width - 20, 80)];
 //  editSections.backgroundColor = [UIColor whiteColor];
-  [self.navView addSubview:self.editSections];
+  [self.navTableView addSubview:self.editSections];
   
   [self.editSections addTarget:self action:@selector(onTapEditSections:) forControlEvents:UIControlEventTouchDown];
   [self.editSections addTarget:self action:@selector(onEditSections:) forControlEvents:UIControlEventTouchUpInside];
@@ -238,7 +242,14 @@
 - (BOOL)prefersStatusBarHidden {
   return YES;
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+  if (self.feedsView) {
+    [UIView animateWithDuration:.75 delay:.25 usingSpringWithDamping:12 initialSpringVelocity:14 options:0 animations:^{
+      self.feedsView.center = CGPointMake(160, 284);
+    } completion:^(BOOL finished) {
+    }];
+  }
+}
 #pragma mark- Gesture Methods
 
 // Drag the main feed container up and down
@@ -265,7 +276,7 @@
     float navViewScale = .96 + (1 - .96) * ((newCenter.y - self.view.center.y) / self.view.frame.size.height);
     self.feedsView.center = newCenter;
     self.navView.alpha = (newCenter.y - self.view.center.y) / self.view.frame.size.height;
-    self.navView.transform = CGAffineTransformMakeScale(navViewScale, navViewScale);
+    self.navTableView.transform = CGAffineTransformMakeScale(navViewScale, navViewScale);
   }else if(panGestureRecognizer.state == UIGestureRecognizerStateChanged){
     panDistance.y = panLocation.y - self.panStart.y;
     
@@ -280,7 +291,7 @@
     float navViewScale = .96 + (1 - .96) * ((newCenter.y - self.view.center.y) / self.view.frame.size.height);
     self.feedsView.center = newCenter;
     self.navView.alpha = (newCenter.y - self.view.center.y + 200) / self.view.frame.size.height;
-    self.navView.transform = CGAffineTransformMakeScale(navViewScale, navViewScale);
+    self.navTableView.transform = CGAffineTransformMakeScale(navViewScale, navViewScale);
     
   }else if(panGestureRecognizer.state == UIGestureRecognizerStateEnded){
     panDistance.y = panLocation.y - self.panStart.y;

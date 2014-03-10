@@ -59,36 +59,57 @@
   self.animator = [[UIDynamicAnimator alloc] init];
   self.gravity = [[UIGravityBehavior alloc] init];
 
+  ////////////
+  // SECTIONS
+  // SECTION OPEN SLOT
+  self.sectionOpenSlot = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width / 2 - 70, 80, 140, 248)];
+  self.sectionOpenSlot.layer.borderColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:.75].CGColor;
+  self.sectionOpenSlot.layer.borderWidth = 1.0f;
+  self.sectionOpenSlot.layer.cornerRadius = 2;
+  UILabel *sectionOpenSlotLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.sectionOpenSlot.frame.size.height / 2 - 18, self.sectionOpenSlot.frame.size.width, 18)];
+  sectionOpenSlotLabel.text = @"Drag Here";
+  sectionOpenSlotLabel.textColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:.9];
+  sectionOpenSlotLabel.font = [UIFont fontWithName:@"helvetica-light" size:14.0];
+  sectionOpenSlotLabel.textAlignment = NSTextAlignmentCenter;
+  [self.sectionOpenSlot addSubview:sectionOpenSlotLabel];
+  [self.view addSubview:self.sectionOpenSlot];
+  self.sectionOpenSlot.alpha = 0;
+  
+
+  // SECTION FACEBOOK
   self.sectionFacebookContainer = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width / 2 - 70, 80, 140, 248)];
   self.sectionFacebook = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 140, 248)];
   self.sectionFacebook.backgroundColor = [UIColor whiteColor];
   self.sectionFacebook.layer.shadowOffset = CGSizeMake(0, 0);
   self.sectionFacebook.layer.shadowOpacity = .5;
   self.sectionFacebook.layer.shadowRadius = 2;
+  self.sectionFacebook.layer.cornerRadius = 2;
+  self.sectionFacebook.clipsToBounds = YES;
   [self.view addSubview:self.sectionFacebookContainer];
   [self.sectionFacebookContainer addSubview:self.sectionFacebook];
+  
+  UIImageView *sectionFacebookImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tabBackground1"]];
+  CGRect sectionTabFrame = CGRectMake(self.sectionFacebook.frame.origin.x, self.sectionFacebook.frame.origin.y, self.sectionFacebook.frame.size.width, self.sectionFacebook.frame.size.width);
+  sectionFacebookImage.frame = sectionTabFrame;
+  sectionFacebookImage.contentMode = UIViewContentModeTop;
+  sectionFacebookImage.clipsToBounds = YES;
+  [self.sectionFacebook addSubview:sectionFacebookImage];
+  UILabel *sectionFacebookTitle = [[UILabel alloc] initWithFrame:CGRectMake(8, 8, self.sectionFacebook.frame.size.width, 20)];
+  sectionFacebookTitle.text = @"Facebook";
+  sectionFacebookTitle.textColor = [UIColor whiteColor];
+  sectionFacebookTitle.font = [UIFont fontWithName:@"helvetica-bold" size:20.0];
+  sectionFacebookTitle.layer.shadowOffset = CGSizeMake(0, 1);
+  sectionFacebookTitle.layer.shadowOpacity = .35;
+  sectionFacebookTitle.layer.shadowRadius = .5;
+  [self.sectionFacebook addSubview:sectionFacebookTitle];
+  
   self.sectionFacebook.transform = CGAffineTransformMakeRotation(-M_PI/180);
   [UIView animateWithDuration:.75 delay:0 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAutoreverse|UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionRepeat animations:^{
     self.sectionFacebook.transform = CGAffineTransformMakeRotation(M_PI/180);
   } completion:^(BOOL finished) {
   }];
 
-  
-  self.sectionOpenSlot = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width / 2 - 70, 80, 140, 248)];
-//  self.sectionOpenSlot.backgroundColor = [UIColor whiteColor];
-  self.sectionOpenSlot.layer.borderColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:.75].CGColor;
-  self.sectionOpenSlot.layer.borderWidth = 1.0f;
-  self.sectionOpenSlot.layer.cornerRadius = 2;
-  UILabel *sectionOpenSlotLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.sectionOpenSlot.frame.size.height / 2 - 20, self.sectionOpenSlot.frame.size.width, 20)];
-  sectionOpenSlotLabel.text = @"Drag Here";
-  sectionOpenSlotLabel.textColor = [UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:.75];
-  sectionOpenSlotLabel.font = [UIFont fontWithName:@"helvetica-light" size:14.0];
-  sectionOpenSlotLabel.textAlignment = NSTextAlignmentCenter;
-  [self.sectionOpenSlot addSubview:sectionOpenSlotLabel];
-
-  [self.view addSubview:self.sectionOpenSlot];
-  self.sectionOpenSlot.alpha = 0;
-  
+  // SECTION NEWS
   self.sectionNewsContainer = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width / 2 - 70, 400, 140, 248)];
   self.sectionNewsContainer.clipsToBounds = NO;
   self.sectionNews = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 140, 248)];
@@ -96,9 +117,27 @@
   self.sectionNews.layer.shadowOffset = CGSizeMake(0, 0);
   self.sectionNews.layer.shadowOpacity = .5;
   self.sectionNews.layer.shadowRadius = 2;
+  self.sectionNews.layer.cornerRadius = 2;
   [self.view addSubview:self.sectionNewsContainer];
   [self.sectionNewsContainer addSubview:self.sectionNews];
+  
+  UIImageView *sectionNewsImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"newsTabBackground1"]];
+  sectionNewsImage.frame = sectionTabFrame;
+  sectionNewsImage.contentMode = UIViewContentModeTop;
+  sectionNewsImage.clipsToBounds = YES;
+  [self.sectionNews addSubview:sectionNewsImage];
+  UILabel *sectionNewsTitle = [[UILabel alloc] initWithFrame:sectionFacebookTitle.frame];
+  sectionNewsTitle.text = @"News";
+  sectionNewsTitle.textColor = [UIColor whiteColor];
+  sectionNewsTitle.font = [UIFont fontWithName:@"helvetica-bold" size:20.0];
+  sectionNewsTitle.layer.shadowOffset = CGSizeMake(0, 1);
+  sectionNewsTitle.layer.shadowOpacity = .35;
+  sectionNewsTitle.layer.shadowRadius = .5;
+  [self.sectionNews addSubview:sectionNewsTitle];
+  
 
+  
+  // GESTURE RECOGNIZERS
   self.dragCard = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onDragCard:)];
   [self.sectionNewsContainer addGestureRecognizer:self.dragCard];
   self.dragCard.delegate = self;
@@ -115,6 +154,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 #pragma mark - Private Gesture Methods
 
@@ -136,6 +176,7 @@
 
     [UIView animateWithDuration:.5 delay:0 usingSpringWithDamping:12 initialSpringVelocity:40 options:UIViewAnimationOptionOverrideInheritedOptions|UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionAllowUserInteraction animations:^{
       firstChild.transform = CGAffineTransformMakeScale(1.1, 1.1);
+      self.sectionOpenSlot.alpha = 1;
     } completion:nil];
     CGPoint centerPoint = CGPointMake(point.x - self.dragOffset.x + view.frame.size.width/2, point.y - self.dragOffset.y + view.frame.size.height/2);
     view.center = centerPoint;
@@ -151,13 +192,15 @@
 
     CGPoint destPoint = centerPoint.y < self.kThreshold ? CGPointMake(160, 204) : CGPointMake(160, 524);
     UISnapBehavior *snap = [[UISnapBehavior alloc] initWithItem:self.sectionNewsContainer snapToPoint:destPoint];
+    snap.damping = 1;
     [self.animator addBehavior:snap];
     self.snap = snap;
     if(view.center.y > self.kThreshold){
       [self unMakeRoom];
     }
-    [UIView animateWithDuration:.75 delay:0 usingSpringWithDamping:12 initialSpringVelocity:20 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionAllowUserInteraction animations:^{
+    [UIView animateWithDuration:.75 delay:0 usingSpringWithDamping:12 initialSpringVelocity:20 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionOverrideInheritedOptions animations:^{
       firstChild.transform = CGAffineTransformMakeScale(1, 1);
+      self.sectionOpenSlot.alpha = 0;
     } completion:^(BOOL finished) {
       if(view.center.y < self.kThreshold){
         [UIView animateWithDuration:.75 delay:0 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction animations:^{
@@ -194,13 +237,11 @@
 - (void)makeRoom{
   [UIView animateWithDuration:.5 delay:0 usingSpringWithDamping:12 initialSpringVelocity:12 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionAllowUserInteraction animations:^{
     self.sectionFacebookContainer.center = CGPointMake(self.sectionFacebookContainer.center.x - self.sectionFacebookContainer.frame.size.width - 12, self.sectionFacebookContainer.center.y);
-    self.sectionOpenSlot.alpha = 1;
   } completion:nil];
 }
 - (void)unMakeRoom{
   [UIView animateWithDuration:.5 delay:0 usingSpringWithDamping:12 initialSpringVelocity:12 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionAllowUserInteraction animations:^{
     self.sectionFacebookContainer.center = CGPointMake(self.sectionFacebookContainer.center.x + self.sectionFacebookContainer.frame.size.width + 12, self.sectionFacebookContainer.center.y);
-    self.sectionOpenSlot.alpha = 0;
   } completion:nil];
 }
 
