@@ -64,6 +64,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)onPanStories:(UIPanGestureRecognizer *)panGestureRecognizer{
 
 - (void)onLP:(UILongPressGestureRecognizer *)longPress{
   UIView *view = longPress.view;

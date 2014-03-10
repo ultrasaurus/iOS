@@ -94,7 +94,6 @@
   self.feedHeaderLabel.textColor = [UIColor whiteColor];
 //  self.feedHeaderLabel.shadowColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.5];
 //  self.feedHeaderLabel.shadowOffset = CGSizeMake(0, 1);
-  self.feedHeaderLabel.layer.shadowRadius = 2;
   self.feedHeaderLabel.layer.shadowOffset = CGSizeMake(0, 1);
   self.feedHeaderLabel.layer.shadowOpacity = .35;
   self.feedHeaderLabel.layer.shadowRadius = .5;
@@ -424,10 +423,12 @@
   NSLog(@"HELLO WORLD");
   UIViewController *svc = [[SectionsViewController alloc] init];
   UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:svc];
-  navigationController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//  svc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 
-  [self presentViewController:navigationController animated:YES completion:nil];
+//  navigationController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+  navigationController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//  svc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//  [self presentViewController:navigationController animated:YES completion:nil];
+  [self presentViewController:navigationController animated:YES completion:NULL];
 }
 - (void)onTapEditSections:(id)sender{
 //  NSLog(@"HELLO WORLD");

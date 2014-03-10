@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import "SectionsViewController.h"
 
 @implementation AppDelegate
 
@@ -18,6 +19,9 @@
 
   MainViewController *mvc = [[MainViewController alloc] init];
   self.window.rootViewController = mvc;
+
+//  SectionsViewController *svc = [[SectionsViewController alloc] init];
+//  self.window.rootViewController = svc;
 
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];

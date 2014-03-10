@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SectionsViewController : UIViewController
+@interface SectionsViewController : UIViewController <UIGestureRecognizerDelegate>
 
 @end
